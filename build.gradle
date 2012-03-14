@@ -1,0 +1,46 @@
+// gradle-android plugin configuration
+buildscript {
+    repositories {
+      mavenLocal()
+      mavenRepo(urls: 'http://jvoegele.com/maven2/')
+    }
+    dependencies {
+      //classpath 'com.jvoegele.gradle.plugins:android-plugin:0.9.9'
+      classpath 'com.jvoegele.gradle.plugins:gradle-android-plugin:1.0.0-SNAPSHOT'
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+group = 'org.specialk.super8'
+version = '1.0'
+    
+defaultTasks 'clean', 'build', 'install'
+
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'android'
+
+sourceCompatibility = '1.6'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    mavenRepo(urls: 'https://github.com/kaeppler/maven2')
+}
+
+dependencies {
+    compile('org.roboguice:roboguice:1.1.2')
+    
+    compile('com.github.ignition:ignition-core:0.1') {
+        exclude module: 'android'
+    }
+}

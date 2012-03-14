@@ -1,0 +1,9 @@
+bin
+target
+build
+.DS_Store
+.gradle
+.settings
+.project
+.classpath
+gen

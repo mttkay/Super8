@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="button_blue">#225577</color>
+    <color name="button_blue_light">#77aacc</color>
+    <color name="stroke_blue">#113344</color>
+    <color name="toast_info_bg">#77aacc</color>
+    <color name="toast_info_stroke">#00aacc</color>
+    <color name="toast_error_bg">#80FF0000</color>
+    <color name="toast_error_stroke">#00FF0000</color>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+
+  <EditText
+    android:id="@android:id/edit"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/like_artist_or_director_hint"
+    android:inputType="textAutoCorrect"
+    android:selectAllOnFocus="true" />
+
+  <ProgressBar
+    android:id="@android:id/progress"
+    style="android:style/Widget.ProgressBar.Small"
+    android:layout_width="18dp"
+    android:layout_height="18dp"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:layout_marginRight="10dp"
+    android:visibility="visible" />
+
+</RelativeLayout>

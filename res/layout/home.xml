@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ignition="http://github.com/ignition/schema"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <fragment
+      android:name="com.github.super8.fragments.HeaderFragment"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:tag="header_fragment" />
+
+    <fragment
+      android:id="@+id/content_fragment"
+      android:name="com.github.super8.fragments.ContentFragment"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:tag="content_fragment" />
+  </LinearLayout>
+
+  <SlidingDrawer
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="400dip"
+    android:layout_alignParentBottom="true"
+    android:content="@+id/learn_fragment"
+    android:handle="@+id/drawer_handle" >
+
+    <ImageView
+      android:id="@id/drawer_handle"
+      android:layout_width="88dip"
+      android:layout_height="44dip"
+      android:src="@android:drawable/arrow_up_float" />
+
+    <fragment
+      android:id="@id/learn_fragment"
+      android:tag="learn_movies_fragment"
+      android:name="com.github.super8.fragments.LearnMoviesFragment"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+  </SlidingDrawer>
+
+</RelativeLayout>
