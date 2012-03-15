@@ -2,8 +2,8 @@ package com.github.super8.apis.tmdb.v3;
 
 import android.content.Context;
 
-import com.github.ignition.core.tasks.IgnitedAsyncTaskDelegateHandler;
+import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
 
 public interface TmdbApiHandler<ReturnT> extends
-    IgnitedAsyncTaskDelegateHandler<Context, Void, ReturnT> {
+    IgnitedAsyncTaskHandler<Context, Void, ReturnT> {
 }

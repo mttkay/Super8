@@ -6,12 +6,12 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
-import com.github.ignition.core.tasks.IgnitedAsyncTaskDelegateHandler;
+import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
 public abstract class TaskManagingFragment<ReturnT> extends RoboFragment implements
-    IgnitedAsyncTaskDelegateHandler<Context, Void, ReturnT> {
+    IgnitedAsyncTaskHandler<Context, Void, ReturnT> {
 
   @Inject
   private TaskManager taskManager;

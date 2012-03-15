@@ -6,7 +6,7 @@ import java.util.Map;
 import android.content.Context;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
-import com.github.ignition.core.tasks.IgnitedAsyncTaskDelegateHandler;
+import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
 
 public class TaskManager {
 
@@ -27,7 +27,7 @@ public class TaskManager {
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  public void reconnectTasks(IgnitedAsyncTaskDelegateHandler handler) {
+  public void reconnectTasks(IgnitedAsyncTaskHandler handler) {
     for (int taskId : tasks.keySet()) {
       tasks.get(taskId).connect(handler);
     }
