@@ -13,10 +13,19 @@
 
   <ListView
     android:id="@android:id/list"
-    android:background="@color/dark_grey"
-    android:cacheColorHint="@color/dark_grey"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="1" />
+    android:layout_weight="1"
+    android:background="@color/dark_grey"
+    android:cacheColorHint="@color/dark_grey" />
+
+  <TextView
+    android:id="@android:id/empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_grey"
+    android:gravity="center"
+    android:text="No Results"
+    android:textAppearance="@style/TextAppearance.Large" />
 
 </LinearLayout>

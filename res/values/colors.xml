@@ -9,5 +9,9 @@
     <color name="toast_error_bg">#80FF0000</color>
     <color name="toast_error_stroke">#00FF0000</color>
     <color name="translucent_black">#80000000</color>
-    <color name="dark_grey">#111122</color>
+    <color name="translucent_dark_blue">#80113344</color>
+    <color name="dark_blue">#113344</color>
+    <color name="dark_grey">#112222</color>
+    <color name="pink">#ff6bc2</color>
+    <color name="light_pink">#f8bbdf</color>
 </resources>

@@ -9,6 +9,7 @@
     style="@style/InfoBox.TextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:textColor="@color/light_pink"
     android:text="@string/help_text_first_start" />
 
   <TextView

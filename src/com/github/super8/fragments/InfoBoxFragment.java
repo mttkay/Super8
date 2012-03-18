@@ -71,37 +71,51 @@ public class InfoBoxFragment extends RoboFragment {
   private void animateInfoView(final int child) {
     final View currentView = flipper.getCurrentView();
     final View nextView = flipper.getChildAt(child);
+    TextView text1 = (TextView) currentView.findViewById(android.R.id.text1);
+    TextView text2 = (TextView) currentView.findViewById(android.R.id.text2);
 
-    AnimatorSet scaleAnim = new AnimatorSet();
-    scaleAnim.playTogether(ObjectAnimator.ofFloat(currentView, "scaleX", 1, 0.5f),
-        ObjectAnimator.ofFloat(currentView, "scaleY", 1, 0.5f));
+    AnimatorSet fadeAnim = new AnimatorSet();
+    fadeAnim.playTogether(ObjectAnimator.ofFloat(text1, "alpha", 1, 0),
+        ObjectAnimator.ofFloat(text2, "alpha", 1, 0));
 
-    AnimatorSet flipAnim = new AnimatorSet();
-    flipAnim.playTogether(ObjectAnimator.ofFloat(currentView, "rotationX", 0, 90));
+//    AnimatorSet scaleAnim = new AnimatorSet();
+//    scaleAnim.playTogether(ObjectAnimator.ofFloat(currentView, "scaleX", 1, 0.5f),
+//        ObjectAnimator.ofFloat(currentView, "scaleY", 1, 0.5f));
+//
+//    AnimatorSet flipAnim = new AnimatorSet();
+//    flipAnim.playTogether(ObjectAnimator.ofFloat(currentView, "rotationX", 0, 90));
+//
+//    AnimatorSet outAnim = new AnimatorSet();
+//    outAnim.playSequentially(fadeAnim, scaleAnim, flipAnim);
+//
+//    outAnim.setDuration(500);
+    fadeAnim.setDuration(250);
+    fadeAnim.start();
 
-    AnimatorSet outAnim = new AnimatorSet();
-    outAnim.playSequentially(scaleAnim, flipAnim);
-
-    outAnim.setDuration(500);
-    outAnim.start();
-
-    outAnim.addListener(new AnimatorListenerAdapter() {
+    fadeAnim.addListener(new AnimatorListenerAdapter() {
       @Override
       public void onAnimationEnd(Animator animation) {
-        //currentView.setVisibility(View.GONE);
+        // currentView.setVisibility(View.GONE);
+        TextView text1 = (TextView) nextView.findViewById(android.R.id.text1);
+        TextView text2 = (TextView) nextView.findViewById(android.R.id.text2);
 
-        AnimatorSet scaleAnim = new AnimatorSet();
-        scaleAnim.playTogether(ObjectAnimator.ofFloat(nextView, "scaleX", 0.5f, 1),
-            ObjectAnimator.ofFloat(nextView, "scaleY", 0.5f, 1));
+        AnimatorSet fadeAnim = new AnimatorSet();
+        fadeAnim.playTogether(ObjectAnimator.ofFloat(text1, "alpha", 0, 1),
+            ObjectAnimator.ofFloat(text2, "alpha", 0, 1));
 
-        AnimatorSet flipAnim = new AnimatorSet();
-        flipAnim.playTogether(ObjectAnimator.ofFloat(nextView, "rotationX", 90, 0));
-
-        AnimatorSet inAnim = new AnimatorSet();
-        inAnim.playSequentially(flipAnim, scaleAnim);
-
-        inAnim.setDuration(500);
-        inAnim.start();
+//        AnimatorSet scaleAnim = new AnimatorSet();
+//        scaleAnim.playTogether(ObjectAnimator.ofFloat(nextView, "scaleX", 0.5f, 1),
+//            ObjectAnimator.ofFloat(nextView, "scaleY", 0.5f, 1));
+//
+//        AnimatorSet flipAnim = new AnimatorSet();
+//        flipAnim.playTogether(ObjectAnimator.ofFloat(nextView, "rotationX", 90, 0));
+//
+//        AnimatorSet inAnim = new AnimatorSet();
+//        inAnim.playSequentially(flipAnim, scaleAnim, fadeAnim);
+//
+//        inAnim.setDuration(500);
+        fadeAnim.setDuration(250);
+        fadeAnim.start();
         flipper.setDisplayedChild(child);
       }
     });

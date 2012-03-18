@@ -42,4 +42,11 @@ public class TaskManager {
   public void clearTasks() {
     tasks.clear();
   }
+  
+  public void cancelAllTasks() {
+    for (int taskId : tasks.keySet()) {
+      tasks.get(taskId).cancel(true);
+    }
+
+  }
 }

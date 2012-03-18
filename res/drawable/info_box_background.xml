@@ -3,12 +3,12 @@
 
   <corners android:radius="10dp" />
 
-  <stroke
+<!--   <stroke
     android:dashGap="1dp"
     android:dashWidth="1dp"
     android:width="1dp"
     android:color="#FFF" />
-
+ -->
   <gradient
     android:endColor="#80000000"
     android:gradientRadius="250"

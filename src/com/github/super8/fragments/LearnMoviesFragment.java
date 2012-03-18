@@ -2,6 +2,7 @@ package com.github.super8.fragments;
 
 import java.util.List;
 
+import roboguice.fragment.RoboListFragment;
 import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
@@ -22,15 +23,17 @@ import com.github.super8.adapters.PersonListAdapter;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.apis.tmdb.v3.TmdbApiHandler;
 import com.github.super8.model.Person;
+import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
-public class LearnMoviesFragment extends TaskManagingFragment<List<Person>> implements
-    TmdbApiHandler<List<Person>>, TextWatcher, Handler.Callback {
+public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
+    TextWatcher, Handler.Callback {
 
   private static final int QUERY_DELAY = 500;
   private static final int QUERY_READY_MSG = 0;
   private static final int TASK_SEARCH_PERSON = 0;
 
+  @Inject private TaskManager taskManager;
   @Inject private TmdbApi tmdb;
 
   @InjectView(android.R.id.list) private ListView listView;
@@ -40,10 +43,20 @@ public class LearnMoviesFragment extends TaskManagingFragment<List<Person>> impl
   private PersonListAdapter adapter;
   private Handler queryReadyHandler;
 
+  public LearnMoviesFragment() {
+    setRetainInstance(true);
+  }
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     queryReadyHandler = new Handler(this);
+  }
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    taskManager.reconnectTasks(this);
   }
 
   @Override
@@ -56,15 +69,21 @@ public class LearnMoviesFragment extends TaskManagingFragment<List<Person>> impl
     super.onViewCreated(view, savedInstanceState);
 
     adapter = new PersonListAdapter(getActivity());
-    listView.setAdapter(adapter);
+    setListAdapter(adapter);
 
     searchField.addTextChangedListener(this);
+  }
+
+  @Override
+  public void onDetach() {
+    super.onDetach();
+    taskManager.disconnectTasks();
   }
 
   public void lookupPerson() {
     String query = searchField.getText().toString().trim();
     if (!TextUtils.isEmpty(query)) {
-      addTask(TASK_SEARCH_PERSON, tmdb.searchPerson(this, query));
+      taskManager.registerTask(TASK_SEARCH_PERSON, tmdb.searchPerson(this, query));
     } else {
       adapter.clear();
     }
@@ -89,7 +108,16 @@ public class LearnMoviesFragment extends TaskManagingFragment<List<Person>> impl
   }
 
   @Override
+  public void onTaskFailed(Context arg0, Exception arg1) {
+  }
+
+  @Override
+  public void onTaskProgress(Context arg0, Void... arg1) {
+  }
+
+  @Override
   public void afterTextChanged(Editable s) {
+    taskManager.cancelAllTasks();
     if (queryReadyHandler.hasMessages(QUERY_READY_MSG)) {
       queryReadyHandler.removeMessages(QUERY_READY_MSG);
     }
@@ -109,4 +137,10 @@ public class LearnMoviesFragment extends TaskManagingFragment<List<Person>> impl
     lookupPerson();
     return true;
   }
+
+  @Override
+  public Context getContext() {
+    return getActivity();
+  }
+
 }
