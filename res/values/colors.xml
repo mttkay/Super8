@@ -8,4 +8,6 @@
     <color name="toast_info_stroke">#00aacc</color>
     <color name="toast_error_bg">#80FF0000</color>
     <color name="toast_error_stroke">#00FF0000</color>
+    <color name="translucent_black">#80000000</color>
+    <color name="dark_grey">#111122</color>
 </resources>

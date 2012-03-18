@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#80000000"
-  android:orientation="vertical" >
+  android:background="@color/translucent_black"
+  android:orientation="vertical"
+  android:padding="20dp" >
 
   <include
     android:layout_width="match_parent"
@@ -12,6 +13,8 @@
 
   <ListView
     android:id="@android:id/list"
+    android:background="@color/dark_grey"
+    android:cacheColorHint="@color/dark_grey"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1" />

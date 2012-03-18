@@ -3,27 +3,24 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" >
 
-  <ToggleButton
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:background="@drawable/like_mode_button"
-    android:layout_marginLeft="15dp"
-    android:layout_marginTop="15dp"
-    android:onClick="onLikeModeButtonClicked" />
-
-  <Button
-    style="@style/CircleButton"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_marginBottom="15dp"
-    android:layout_marginRight="15dp" />
-
   <ImageView
     android:id="@+id/logo_image"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
+    android:layout_marginTop="15dp"
+    android:layout_centerHorizontal="true"
     android:contentDescription="@string/app_name"
-    android:scaleType="centerInside" />
+    android:src="@drawable/logo_off" />
+  
+  <ToggleButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/logo_image"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/like_mode_button"
+    android:textOn="@null"
+    android:textOff="@null"
+    android:onClick="onLikeModeButtonClicked" />
+
 
 </RelativeLayout>

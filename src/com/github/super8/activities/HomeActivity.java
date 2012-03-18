@@ -12,23 +12,19 @@ import android.widget.ToggleButton;
 import com.github.super8.R;
 import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
-import com.github.super8.fragments.ContentFragment;
+import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.LearnMoviesFragment;
-import com.github.super8.support.SuperToast;
 
 public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen {
 
   private HomeScreenPresenter presenter = new HomeScreenPresenter();
 
-  @InjectView(R.id.drawer)
-  private SlidingDrawer drawer;
+  @InjectView(R.id.drawer) private SlidingDrawer drawer;
 
-  @InjectFragment(R.id.content_fragment)
-  private ContentFragment contentFragment;
+  @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
 
-  @InjectFragment(R.id.learn_fragment)
-  private LearnMoviesFragment learnFragment;
-  
+  @InjectFragment(R.id.learn_fragment) private LearnMoviesFragment learnFragment;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -44,15 +40,13 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
       }
     });
-    
-    SuperToast.info(this, R.string.help_text_first_start);
   }
 
   @Override
   public HomeScreenPresenter getPresenter() {
     return presenter;
   }
-  
+
   @Override
   public void showSlidingDrawer() {
     drawer.setVisibility(View.VISIBLE);
@@ -75,19 +69,19 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   @Override
   public void showNoLikesView() {
-    contentFragment.showWelcomeView();
+    infoboxFragment.showWelcomeView();
   }
-  
+
   @Override
   public void showLikeModeView() {
-    contentFragment.showLikeModeView();
+    infoboxFragment.showLikeModeView();
   }
 
   @Override
   public void showMoodView() {
-    contentFragment.showMoodView();
+    infoboxFragment.showMoodView();
   }
-  
+
   public void onLikeModeButtonClicked(View view) {
     ToggleButton button = (ToggleButton) view;
     if (button.isChecked()) {
