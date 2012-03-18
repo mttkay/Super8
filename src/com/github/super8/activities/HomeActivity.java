@@ -1,5 +1,6 @@
 package com.github.super8.activities;
 
+import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
@@ -14,6 +15,8 @@ import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
 import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.LearnMoviesFragment;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
 
 public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen {
 
@@ -49,11 +52,13 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   @Override
   public void showSlidingDrawer() {
+    animate(drawer).alpha(1.0f).setDuration(500).start();
     drawer.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void hideSlidingDrawer() {
+    animate(drawer).alpha(0).setDuration(500).start();
     drawer.setVisibility(View.GONE);
   }
 
@@ -68,8 +73,8 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   }
 
   @Override
-  public void showNoLikesView() {
-    infoboxFragment.showWelcomeView();
+  public void showNoLikesView(boolean firstTime) {
+    infoboxFragment.showWelcomeView(firstTime);
   }
 
   @Override
@@ -84,10 +89,22 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   public void onLikeModeButtonClicked(View view) {
     ToggleButton button = (ToggleButton) view;
+    ValueAnimator anim = ObjectAnimator.ofFloat(button, "scaleX", 1, 1.25f, 1);
+    anim.setDuration(500);
+    anim.start();
     if (button.isChecked()) {
       presenter.likeMode();
     } else {
-      presenter.welcomeMode();
+      presenter.welcomeMode(false);
+    }
+  }
+  
+  @Override
+  public void onBackPressed() {
+    if (drawer.isOpened()) {
+      closeSlidingDrawer();
+    } else {
+      super.onBackPressed();
     }
   }
 }

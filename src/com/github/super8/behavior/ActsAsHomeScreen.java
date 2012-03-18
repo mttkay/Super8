@@ -10,7 +10,7 @@ public interface ActsAsHomeScreen extends Behavior {
   
   void closeSlidingDrawer();
   
-  void showNoLikesView();
+  void showNoLikesView(boolean firstTime);
   
   void showLikeModeView();
   

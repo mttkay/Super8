@@ -14,13 +14,13 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen> {
   public void bind(ActsAsHomeScreen behavior) {
     this.homeScreen = behavior;
 
-    welcomeMode();
+    welcomeMode(true);
   }
 
-  public void welcomeMode() {
+  public void welcomeMode(boolean firstTime) {
     if (noLikesYet()) {
       homeScreen.hideSlidingDrawer();
-      homeScreen.showNoLikesView();
+      homeScreen.showNoLikesView(firstTime);
     } else {
       suggestionMode();
     }
