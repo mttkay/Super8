@@ -20,8 +20,12 @@ import android.widget.ProgressBar;
 
 import com.github.super8.R;
 import com.github.super8.adapters.PersonListAdapter;
+import com.github.super8.apis.tmdb.v3.DefaultTmdbApiHandler;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.apis.tmdb.v3.TmdbApiHandler;
+import com.github.super8.model.CastAppearance;
+import com.github.super8.model.Credits;
+import com.github.super8.model.CrewAppearance;
 import com.github.super8.model.Person;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
@@ -29,9 +33,31 @@ import com.google.inject.Inject;
 public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
     TextWatcher, Handler.Callback {
 
+  static class GetCreditsHandler extends DefaultTmdbApiHandler<Credits> {
+
+    public GetCreditsHandler(Context context) {
+      super(context);
+    }
+
+    @Override
+    public boolean onTaskSuccess(Context context, Credits result) {
+      System.out.println("New credits: " + result.getTmdbId());
+      System.out.println("CAST:");
+      for (CastAppearance app : result.getCastAppearances()) {
+        System.out.println(app.getMovieTitle());
+      }
+      System.out.println("CREW:");
+      for (CrewAppearance app : result.getCrewAppearances()) {
+        System.out.println(app.getMovieTitle());
+      }
+      return super.onTaskSuccess(context, result);
+    }
+  }
+
   private static final int QUERY_DELAY = 500;
   private static final int QUERY_READY_MSG = 0;
   private static final int TASK_SEARCH_PERSON = 0;
+  private static final int TASK_GET_CREDITS = 1;
 
   @Inject private TaskManager taskManager;
   @Inject private TmdbApi tmdb;
@@ -78,6 +104,15 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
   public void onDetach() {
     super.onDetach();
     taskManager.disconnectTasks();
+  }
+
+  @Override
+  public void onListItemClick(ListView l, View v, int position, long id) {
+    super.onListItemClick(l, v, position, id);
+
+    Person person = adapter.getItem(position);
+    taskManager.registerTask(TASK_GET_CREDITS,
+        tmdb.getCredits(new GetCreditsHandler(getActivity()), person.getTmdbId()));
   }
 
   public void lookupPerson() {

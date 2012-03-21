@@ -8,8 +8,9 @@ import com.github.ignition.support.http.IgnitedHttp;
 import com.github.ignition.support.http.IgnitedHttpResponse;
 import com.github.super8.apis.ServerCommunicationException;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbParser;
+import com.github.super8.model.TmdbRecord;
 
-public class TmdbFetchManyTask<ModelT> extends TmdbApiTask<List<ModelT>> {
+public class TmdbFetchManyTask<ModelT extends TmdbRecord> extends TmdbApiTask<List<ModelT>> {
 
   private TmdbParser<ModelT> parser;
 

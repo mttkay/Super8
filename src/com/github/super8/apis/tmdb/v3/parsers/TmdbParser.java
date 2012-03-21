@@ -11,15 +11,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
 import com.github.super8.apis.tmdb.v3.TmdbApi;
+import com.github.super8.model.TmdbRecord;
 
 
-public abstract class TmdbParser<ModelT> {
+public abstract class TmdbParser<ModelT extends TmdbRecord> {
 
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
   public List<ModelT> parseList(String json) throws JSONException {
-    JSONArray personArray = parseResponse(json).getJSONArray("results");
+    JSONObject responseObject = new JSONObject(json);
+    JSONArray personArray = responseObject.getJSONArray("results");
     ArrayList<ModelT> modelList = new ArrayList<ModelT>(TmdbApi.DEFAULT_PAGE_SIZE);
     for (int i = 0; i < personArray.length(); i++) {
       modelList.add(parseOne(personArray.getJSONObject(i)));
@@ -28,17 +32,21 @@ public abstract class TmdbParser<ModelT> {
   }
 
   public ModelT parseOne(String json) throws JSONException {
-    return parseOne(parseResponse(json));
+    return parseOne(new JSONObject(json));
   }
 
-  public abstract ModelT parseOne(JSONObject modelObject) throws JSONException;
-
-  private JSONObject parseResponse(String json) throws JSONException {
-    JSONObject responseObject = new JSONObject(json);
-    return responseObject;
+  private ModelT parseOne(JSONObject modelObject) throws JSONException {
+    ModelT model = parseModel(modelObject);
+    model.setTmdbId(modelObject.getInt("id"));
+    return model;
   }
+  
+  public abstract ModelT parseModel(JSONObject modelObject) throws JSONException;
 
   protected Date parseDate(String date) {
+    if (TextUtils.isEmpty(date)) {
+      return null;
+    }
     try {
       return DATE_FORMAT.parse(date);
     } catch (ParseException e) {

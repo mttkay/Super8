@@ -5,8 +5,10 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import com.github.ignition.support.http.IgnitedHttp;
+import com.github.super8.apis.tmdb.v3.parsers.TmdbCreditsParser;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbMovieParser;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbPersonParser;
+import com.github.super8.model.Credits;
 import com.github.super8.model.Movie;
 import com.github.super8.model.Person;
 import com.google.inject.Inject;
@@ -16,8 +18,7 @@ public class TmdbApi {
   public static final int DEFAULT_PAGE_SIZE = 20;
   public static final String IMAGE_BASE_URL = "http://cf2.imgobject.com/t/p/";
 
-  @SuppressWarnings("unused")
-  private static final String LOG_TAG = TmdbApi.class.getName();
+  @SuppressWarnings("unused") private static final String LOG_TAG = TmdbApi.class.getName();
 
   private static final String API_KEY = "bace5d090265e765e78bf188f414783e";
   private static final String ENDPOINT = "http://api.themoviedb.org/3";
@@ -45,10 +46,10 @@ public class TmdbApi {
     return task;
   }
 
-  public TmdbApiTask<Person> getPerson(TmdbApiHandler<Person> handler, int id) {
+  public TmdbApiTask<Person> getPerson(TmdbApiHandler<Person> handler, int personId) {
     TmdbFetchOneTask<Person> task = new TmdbFetchOneTask<Person>(http, new TmdbPersonParser());
     task.connect(handler);
-    task.execute(ENDPOINT + "/person/" + id + "?api_key=" + API_KEY);
+    task.execute(ENDPOINT + "/person/" + personId + "?api_key=" + API_KEY);
     return task;
   }
 
@@ -56,6 +57,13 @@ public class TmdbApi {
     TmdbFetchManyTask<Person> task = new TmdbFetchManyTask<Person>(http, new TmdbPersonParser());
     task.connect(handler);
     task.execute(searchUrl("person", query));
+    return task;
+  }
+
+  public TmdbApiTask<Credits> getCredits(TmdbApiHandler<Credits> handler, int personId) {
+    TmdbFetchOneTask<Credits> task = new TmdbFetchOneTask<Credits>(http, new TmdbCreditsParser());
+    task.connect(handler);
+    task.execute(ENDPOINT + "/person/" + personId + "/credits?api_key=" + API_KEY);
     return task;
   }
 

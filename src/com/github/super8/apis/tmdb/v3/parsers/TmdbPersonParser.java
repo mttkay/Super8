@@ -8,9 +8,8 @@ import com.github.super8.model.Person;
 public class TmdbPersonParser extends TmdbParser<Person> {
 
   @Override
-  public Person parseOne(JSONObject modelObject) throws JSONException {
+  public Person parseModel(JSONObject modelObject) throws JSONException {
     Person person = new Person();
-    person.setTmdbId(modelObject.getInt("id"));
     person.setName(modelObject.getString("name"));
 
     String imagePath = modelObject.getString("profile_path");

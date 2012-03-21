@@ -6,20 +6,11 @@ import android.content.Context;
 
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 
-public class Person {
+public class Person extends TmdbRecord {
 
-  private int tmdbId;
   private String name, biography, imagePath, scaledImageUrl;
   private Date birthday;
 
-  public int getTmdbId() {
-    return tmdbId;
-  }
-  
-  public void setTmdbId(int id) {
-    this.tmdbId = id;
-  }
-  
   public String getName() {
     return name;
   }

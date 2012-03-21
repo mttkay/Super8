@@ -2,20 +2,11 @@ package com.github.super8.model;
 
 import java.util.Date;
 
-public class Movie {
+public class Movie extends TmdbRecord {
 
-  private int tmdbId;
   private String imdbId, title;
   private String backdropPath, posterPath;
   private Date releaseDate;
-
-  public int getTmdbId() {
-    return tmdbId;
-  }
-
-  public void setTmdbId(int tmdbId) {
-    this.tmdbId = tmdbId;
-  }
 
   public String getImdbId() {
     return imdbId;

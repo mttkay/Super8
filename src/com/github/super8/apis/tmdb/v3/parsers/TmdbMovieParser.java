@@ -8,9 +8,8 @@ import com.github.super8.model.Movie;
 public class TmdbMovieParser extends TmdbParser<Movie> {
 
   @Override
-  public Movie parseOne(JSONObject modelObject) throws JSONException {
+  public Movie parseModel(JSONObject modelObject) throws JSONException {
     Movie movie = new Movie();
-    movie.setTmdbId(modelObject.getInt("id"));
     movie.setTitle(modelObject.getString("title"));
     movie.setReleaseDate(parseDate(modelObject.getString("release_date")));
 
