@@ -26,7 +26,12 @@ public abstract class TmdbApiTask<ModelT> extends IgnitedAsyncTask<Context, Stri
     try {
       Log.d(LOG_TAG, "url: " + url);
       IgnitedHttpResponse response = http.get(url).send();
-      Log.d(LOG_TAG, "status: " + response.getStatusCode());
+
+      int statusCode = response.getStatusCode();
+      Log.d(LOG_TAG, "status: " + statusCode);
+      if (statusCode != 200) {
+        throw new TmdbError(response);
+      }
       return handleResponse(response);
     } catch (IOException e) {
       throw new ServerCommunicationException(e);
