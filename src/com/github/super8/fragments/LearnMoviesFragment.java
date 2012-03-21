@@ -90,29 +90,34 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
   }
 
   @Override
-  public void onTaskStarted(Context context) {
+  public boolean onTaskStarted(Context context) {
     progressSpinner.setVisibility(View.VISIBLE);
+    return true;
   }
 
   @Override
-  public void onTaskSuccess(Context context, List<Person> result) {
+  public boolean onTaskSuccess(Context context, List<Person> result) {
     adapter.clear();
     for (Person person : result) {
       adapter.add(person);
     }
+    return true;
   }
 
   @Override
-  public void onTaskCompleted(Context context, List<Person> result) {
+  public boolean onTaskCompleted(Context context, List<Person> result) {
     progressSpinner.setVisibility(View.GONE);
+    return true;
   }
 
   @Override
-  public void onTaskFailed(Context arg0, Exception arg1) {
+  public boolean onTaskFailed(Context arg0, Exception arg1) {
+    return false;
   }
 
   @Override
-  public void onTaskProgress(Context arg0, Void... arg1) {
+  public boolean onTaskProgress(Context arg0, Void... arg1) {
+    return true;
   }
 
   @Override
@@ -143,4 +148,7 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
     return getActivity();
   }
 
+  @Override
+  public void setContext(Context arg0) {
+  }
 }

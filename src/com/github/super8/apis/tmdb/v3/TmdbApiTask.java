@@ -34,9 +34,10 @@ public abstract class TmdbApiTask<ModelT> extends IgnitedAsyncTask<Context, Stri
   }
 
   @Override
-  public void onTaskFailed(Context context, Exception error) {
+  public boolean onTaskFailed(Context context, Exception error) {
     super.onTaskFailed(context, error);
     SuperToast.error(context, error);
+    return true;
   }
 
   protected abstract ModelT handleResponse(IgnitedHttpResponse response) throws Exception;

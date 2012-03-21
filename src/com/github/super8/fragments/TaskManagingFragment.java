@@ -38,19 +38,23 @@ public abstract class TaskManagingFragment<ReturnT> extends RoboFragment impleme
   }
 
   @Override
-  public void onTaskStarted(Context context) {
+  public boolean onTaskStarted(Context context) {
+    return false;
   }
 
   @Override
-  public void onTaskProgress(Context context, Void... progress) {
+  public boolean onTaskProgress(Context context, Void... progress) {
+    return false;
   }
 
   @Override
-  public void onTaskCompleted(Context context, ReturnT result) {
+  public boolean onTaskCompleted(Context context, ReturnT result) {
+    return false;
   }
 
   @Override
-  public void onTaskFailed(Context context, Exception error) {
+  public boolean onTaskFailed(Context context, Exception error) {
+    return false;
   }
 
   protected void addTask(int taskId, IgnitedAsyncTask<Context, ?, ?, ?> task) {
