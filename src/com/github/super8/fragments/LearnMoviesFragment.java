@@ -8,15 +8,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.super8.R;
 import com.github.super8.adapters.PersonListAdapter;
@@ -54,15 +61,34 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
     }
   }
 
+  static class GetPersonHandler extends DefaultTmdbApiHandler<Person> {
+
+    public GetPersonHandler(Context context) {
+      super(context);
+    }
+
+    @Override
+    public boolean onTaskSuccess(Context context, Person person) {
+      FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+      FragmentTransaction tx = fragmentManager.beginTransaction();
+      //tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      tx.replace(R.id.drawer_content, new PersonDetailsFragment());
+      tx.addToBackStack(null);
+      tx.commit();
+      return true;
+    }
+  }
+
   private static final int QUERY_DELAY = 500;
   private static final int QUERY_READY_MSG = 0;
   private static final int TASK_SEARCH_PERSON = 0;
-  private static final int TASK_GET_CREDITS = 1;
+  private static final int TASK_GET_PERSON_DETAILS = 1;
 
   @Inject private TaskManager taskManager;
   @Inject private TmdbApi tmdb;
 
   @InjectView(android.R.id.list) private ListView listView;
+  @InjectView(android.R.id.empty) private TextView emptyView;
   @InjectView(android.R.id.edit) private EditText searchField;
   @InjectView(android.R.id.progress) private ProgressBar progressSpinner;
 
@@ -87,7 +113,7 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.learn_movies_fragment, container);
+    return inflater.inflate(R.layout.learn_movies_fragment, null);
   }
 
   @Override
@@ -96,6 +122,10 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
 
     adapter = new PersonListAdapter(getActivity());
     setListAdapter(adapter);
+
+    LayoutAnimationController listViewAnim = new LayoutAnimationController(
+        AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left));
+    listView.setLayoutAnimation(listViewAnim);
 
     searchField.addTextChangedListener(this);
   }
@@ -110,16 +140,26 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
   public void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
 
+    TextView personName = (TextView) v.findViewById(android.R.id.text1);
+    personName.setText(R.string.person_loading);
+
     Person person = adapter.getItem(position);
-    taskManager.registerTask(TASK_GET_CREDITS,
-        tmdb.getCredits(new GetCreditsHandler(getActivity()), person.getTmdbId()));
+    taskManager.registerTask(TASK_GET_PERSON_DETAILS,
+        tmdb.getPerson(new GetPersonHandler(getActivity()), person.getTmdbId()));
+
+    // adapter.clear();
+    // adapter.add(person);
+
+    // adapter.notifyDataSetChanged();
   }
 
   public void lookupPerson() {
     String query = searchField.getText().toString().trim();
     if (!TextUtils.isEmpty(query)) {
+      emptyView.setText(R.string.empty_list);
       taskManager.registerTask(TASK_SEARCH_PERSON, tmdb.searchPerson(this, query));
     } else {
+      emptyView.setText(null);
       adapter.clear();
     }
   }
@@ -142,6 +182,9 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
   @Override
   public boolean onTaskCompleted(Context context, List<Person> result) {
     progressSpinner.setVisibility(View.GONE);
+    InputMethodManager imm = (InputMethodManager) context
+        .getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
     return true;
   }
 

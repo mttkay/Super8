@@ -5,6 +5,7 @@ import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
 import android.widget.SlidingDrawer.OnDrawerOpenListener;
@@ -26,7 +27,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
 
-  @InjectFragment(R.id.learn_fragment) private LearnMoviesFragment learnFragment;
+  // @InjectFragment(R.id.drawer_fragment) private LearnMoviesFragment learnFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,10 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     setContentView(R.layout.home);
 
     presenter.bind(this);
+
+    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+    tx.add(R.id.drawer_content, new LearnMoviesFragment());
+    tx.commit();
 
     drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
@@ -103,7 +108,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   @Override
   public void onBackPressed() {
-    if (drawer.isOpened()) {
+    if (drawer.isOpened() && getSupportFragmentManager().getBackStackEntryCount() == 0) {
       closeSlidingDrawer();
     } else {
       super.onBackPressed();

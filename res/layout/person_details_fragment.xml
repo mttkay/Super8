@@ -6,25 +6,12 @@
   android:orientation="vertical"
   android:padding="20dp" >
 
-  <include
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    layout="@layout/edittext_with_spinner" />
-
-  <ListView
-    android:id="@android:id/list"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:background="@color/dark_grey"
-    android:cacheColorHint="@color/dark_grey" />
-
   <TextView
-    android:id="@android:id/empty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
     android:gravity="center"
+    android:text="person details"
     android:textAppearance="@style/TextAppearance.Large" />
 
 </LinearLayout>

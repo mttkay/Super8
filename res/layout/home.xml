@@ -21,8 +21,8 @@
       android:id="@+id/infobox_fragment"
       android:name="com.github.super8.fragments.InfoBoxFragment"
       android:layout_width="match_parent"
-      android:layout_marginBottom="25dp"
       android:layout_height="0dp"
+      android:layout_marginBottom="25dp"
       android:layout_weight="1" />
   </LinearLayout>
 
@@ -31,7 +31,7 @@
     android:layout_width="match_parent"
     android:layout_height="400dip"
     android:layout_alignParentBottom="true"
-    android:content="@+id/learn_fragment"
+    android:content="@+id/drawer_content"
     android:handle="@+id/drawer_handle" >
 
     <ImageView
@@ -40,9 +40,8 @@
       android:layout_height="60dip"
       android:src="@drawable/handle" />
 
-    <fragment
-      android:id="@id/learn_fragment"
-      android:name="com.github.super8.fragments.LearnMoviesFragment"
+    <FrameLayout
+      android:id="@id/drawer_content"
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
   </SlidingDrawer>
