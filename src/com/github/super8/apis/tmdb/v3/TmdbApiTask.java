@@ -22,7 +22,8 @@ public abstract class TmdbApiTask<ModelT> extends IgnitedAsyncTask<Context, Stri
   }
 
   @Override
-  protected ModelT run(String url) throws Exception {
+  public ModelT run(String... params) throws Exception {
+    String url = params[0];
     try {
       Log.d(LOG_TAG, "url: " + url);
       IgnitedHttpResponse response = http.get(url).send();
