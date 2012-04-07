@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:drawable="@drawable/heart_on" android:state_checked="true" />
-  <item android:drawable="@drawable/heart_off"/>
+  <item android:drawable="@drawable/lens_on" android:state_checked="true" />
+  <item android:drawable="@drawable/lens_off"/>
 
 </selector>

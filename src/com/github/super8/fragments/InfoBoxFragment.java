@@ -28,7 +28,7 @@ public class InfoBoxFragment extends RoboFragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    font = Fonts.loadFont(getActivity(), "AYearWithoutRain.ttf");
+    font = Fonts.robotoThin(getActivity());
   }
 
   @Override
@@ -46,7 +46,7 @@ public class InfoBoxFragment extends RoboFragment {
       TextView textView = (TextView) infoBox.findViewById(android.R.id.text1);
       textView.setTypeface(font);
       textView = (TextView) infoBox.findViewById(android.R.id.text2);
-      textView.setTypeface(font);
+      textView.setTypeface(font, Typeface.BOLD);
     }
 
     return layout;

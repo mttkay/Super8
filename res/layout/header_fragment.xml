@@ -2,25 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" >
+  
+  <ToggleButton
+    android:layout_width="fill_parent"
+    android:layout_height="160dp"
+    android:layout_below="@+id/logo_image"
+    android:layout_marginTop="-30dp"
+    android:background="@drawable/like_mode_button"
+    android:onClick="onLikeModeButtonClicked"
+    android:textOff="@null"
+    android:textOn="@null" />
 
   <ImageView
     android:id="@+id/logo_image"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:layout_centerHorizontal="true"
+    android:layout_width="320dp"
+    android:layout_height="128dp"
     android:contentDescription="@string/app_name"
     android:src="@drawable/logo_off" />
   
-  <ToggleButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/logo_image"
-    android:layout_centerHorizontal="true"
-    android:background="@drawable/like_mode_button"
-    android:textOn="@null"
-    android:textOff="@null"
-    android:onClick="onLikeModeButtonClicked" />
-
-
 </RelativeLayout>

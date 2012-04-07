@@ -17,5 +17,9 @@ public class Fonts {
     }
     return font;
   }
+  
+  public static Typeface robotoThin(Context context) {
+    return loadFont(context, "Roboto-Thin.ttf");
+  }
 
 }

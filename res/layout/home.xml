@@ -14,8 +14,7 @@
     <fragment
       android:name="com.github.super8.fragments.HeaderFragment"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1" />
+      android:layout_height="wrap_content" />
 
     <fragment
       android:id="@+id/infobox_fragment"

@@ -4,7 +4,7 @@
   <string name="app_name">Super 8</string>
   <string name="movie_item_year">Year: %s</string>
   <string name="help_text_first_start">You haven\'t liked anything yet!</string>
-  <string name="help_text_tap_here">Tap the heart to begin.</string>
+  <string name="help_text_tap_here">Tap the lens to begin.</string>
   <string name="help_text_in_like_mode_1">You\'re in learning mode.</string>
   <string name="help_text_in_like_mode_2">Pull the handle and tell me artists you like. Tap the heart again to end.</string>
   <string name="like_artist_or_director_hint">e.g. \"Chris Nolan\" or \"Brad Pitt\"</string>
