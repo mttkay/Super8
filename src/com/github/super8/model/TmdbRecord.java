@@ -1,6 +1,9 @@
 package com.github.super8.model;
 
-public class TmdbRecord {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TmdbRecord implements Parcelable {
 
   private int tmdbId;
 
@@ -28,5 +31,19 @@ public class TmdbRecord {
   @Override
   public int hashCode() {
     return new Integer(tmdbId).hashCode();
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(tmdbId);
+  }
+
+  protected void readFromParcel(Parcel source) {
+    this.tmdbId = source.readInt();
   }
 }
