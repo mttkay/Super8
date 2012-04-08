@@ -72,7 +72,11 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
       FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
       FragmentTransaction tx = fragmentManager.beginTransaction();
       //tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-      tx.replace(R.id.drawer_content, new PersonDetailsFragment());
+      PersonDetailsFragment fragment = new PersonDetailsFragment();
+      Bundle args = new Bundle();
+      args.putParcelable(PersonDetailsFragment.PERSON_EXTRA, person);
+      fragment.setArguments(args);
+      tx.replace(R.id.drawer_content, fragment);
       tx.addToBackStack(null);
       tx.commit();
       return true;
