@@ -12,13 +12,17 @@ import android.widget.ToggleButton;
 
 import com.github.ignition.core.widgets.RemoteImageView;
 import com.github.super8.R;
+import com.github.super8.db.LibraryManager;
 import com.github.super8.model.Person;
+import com.google.inject.Inject;
 
 public class PersonDetailsFragment extends RoboFragment {
 
   public static final String PERSON_EXTRA = "person";
 
   private Person person;
+
+  @Inject private LibraryManager library;
 
   @InjectView(R.id.person_image) RemoteImageView personImageView;
   @InjectView(R.id.person_details_like_button) ToggleButton likeButton;
