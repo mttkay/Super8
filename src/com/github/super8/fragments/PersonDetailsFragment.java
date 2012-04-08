@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ToggleButton;
 
 import com.github.ignition.core.widgets.RemoteImageView;
 import com.github.super8.R;
@@ -18,6 +21,7 @@ public class PersonDetailsFragment extends RoboFragment {
   private Person person;
 
   @InjectView(R.id.person_image) RemoteImageView personImageView;
+  @InjectView(R.id.person_details_like_button) ToggleButton likeButton;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -36,5 +40,12 @@ public class PersonDetailsFragment extends RoboFragment {
     super.onViewCreated(view, savedInstanceState);
     personImageView.setImageUrl(person.getScaledImageUrl(getActivity()));
     personImageView.loadImage();
+
+    likeButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+      }
+    });
   }
 }

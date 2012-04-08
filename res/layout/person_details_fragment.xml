@@ -11,7 +11,18 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    ignition:autoLoad="false"
-    android:scaleType="centerCrop" />
+    android:scaleType="centerCrop"
+    ignition:autoLoad="false" />
+
+  <ToggleButton
+    android:id="@+id/person_details_like_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:textOff="@null"
+    android:textOn="@null" />
 
 </RelativeLayout>
