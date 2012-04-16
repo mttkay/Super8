@@ -15,11 +15,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   @Override
   public void onCreate(SQLiteDatabase db) {
     MovieTable.onCreate(db);
+    PersonTable.onCreate(db);
   }
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     MovieTable.onUpgrade(db, oldVersion, newVersion);
+    PersonTable.onUpgrade(db, oldVersion, newVersion);
   }
 
   public static String foreignKey(String sourceColumn, String targetTable, String targetColumn) {

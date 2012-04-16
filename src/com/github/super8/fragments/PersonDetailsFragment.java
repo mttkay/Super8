@@ -48,7 +48,11 @@ public class PersonDetailsFragment extends RoboFragment {
     likeButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+        if (isChecked) {
+          library.savePerson(person);
+        } else {
+          library.deletePerson(person);
+        }
       }
     });
   }
