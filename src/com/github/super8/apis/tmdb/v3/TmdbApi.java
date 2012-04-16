@@ -12,7 +12,9 @@ import com.github.super8.model.Credits;
 import com.github.super8.model.Movie;
 import com.github.super8.model.Person;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class TmdbApi {
 
   public static final int DEFAULT_PAGE_SIZE = 20;

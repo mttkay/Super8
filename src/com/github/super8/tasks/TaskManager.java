@@ -3,11 +3,13 @@ package com.github.super8.tasks;
 import java.util.HashMap;
 import java.util.Map;
 
+import roboguice.inject.ContextSingleton;
 import android.content.Context;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
 import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
 
+@ContextSingleton
 public class TaskManager {
 
   private Map<Integer, IgnitedAsyncTask<Context, ?, ?, ?>> tasks = new HashMap<Integer, IgnitedAsyncTask<Context, ?, ?, ?>>();
