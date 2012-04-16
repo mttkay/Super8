@@ -8,12 +8,15 @@ public class MovieTable {
   public static final String NAME = "movies";
 
   public interface Columns extends BaseColumns {
+    final String STATE = "state";
   }
 
   public static void onCreate(SQLiteDatabase db) {
     StringBuilder sb = new StringBuilder();
     sb.append(DatabaseHelper.startTable(NAME));
     sb.append(DatabaseHelper.idAsPrimaryKey());
+    sb.append(",");
+    sb.append(Columns.STATE + " INTEGER NOT NULL DEFAULT 0");
     sb.append(DatabaseHelper.endTable());
     db.execSQL(sb.toString());
   }
