@@ -1,0 +1,36 @@
+title Principal user journey
+
+alt watchlist not empty
+  User->App: browse watchlist
+  note over App: this is done in a gallery widget
+  User->App: select movie
+  App->TMDB: load movie details
+  User->IMDB: open in IMDB app
+  note over User,App
+    go to next movie or blacklist current
+    one as "seen" or "don't like"
+  end note
+else watchlist empty
+  alt suggestions available
+    User->App: get next suggestion
+    App->TMDB: load movie details
+    User->App: add movie to watchlist
+    note over User,App
+      here, too, user can decide to
+      blacklist a suggested movie
+    end note
+
+  else no suggestions available
+    User->App: enter like mode
+    note over User,App
+       user can search for actors, directors,        
+       and movies
+    end note
+    User->App: search for actor
+    User->App: select from result list
+    App->TMDB: get person details
+    User->IMDB: open in IMDB app
+    User->App: like person
+  end
+end
+

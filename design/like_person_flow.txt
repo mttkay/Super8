@@ -1,0 +1,10 @@
+title Like person flow
+
+User->App: click "like" on person
+App->TMDB: import filmography
+App->App: save movies for person
+loop for each movie
+    App->TMDB: get cast
+end
+App->App: save top N cast
+App->App: save top N directors
