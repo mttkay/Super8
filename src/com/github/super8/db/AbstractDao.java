@@ -1,5 +1,9 @@
 package com.github.super8.db;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -39,4 +43,34 @@ public abstract class AbstractDao<T extends TmdbRecord> {
   }
 
   protected abstract T buildModel(Cursor c);
+
+  public List<T> getAll(String where, String... whereArgs) {
+    List<T> records = null;
+    Cursor c = db.query(tableName, null, where, whereArgs, null, null, null);
+    int count = c.getCount();
+    if (count > 0) {
+      records = new ArrayList<T>(count);
+      while (c.moveToNext()) {
+        records.add(buildModel(c));
+      }
+    } else {
+      records = Collections.emptyList();
+    }
+    c.close();
+
+    return records;
+  }
+
+  public int count(String where) {
+    StringBuilder query = new StringBuilder();
+    query.append("SELECT COUNT(*) FROM " + tableName);
+    if (where != null) {
+      query.append(" WHERE " + where);
+    }
+    Cursor c = db.rawQuery(query.toString(), null);
+    c.moveToNext();
+    int count = c.getInt(0);
+    c.close();
+    return count;
+  }
 }
