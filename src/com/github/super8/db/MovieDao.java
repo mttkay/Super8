@@ -21,7 +21,7 @@ public class MovieDao implements Dao<Movie> {
   @Override
   public int save(Movie model) {
     insert.clearBindings();
-    insert.bindLong(0, model.getTmdbId());
+    insert.bindLong(1, model.getTmdbId());
     insert.executeInsert();
     return model.getTmdbId();
   }
