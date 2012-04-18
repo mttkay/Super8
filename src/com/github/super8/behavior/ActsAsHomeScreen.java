@@ -10,11 +10,13 @@ public interface ActsAsHomeScreen extends Behavior {
   
   void closeSlidingDrawer();
   
-  void showNoLikesView(boolean firstTime);
+  void showWelcomeView(boolean firstTime);
   
-  void showLikeModeView();
+  void showRecordView();
   
-  void showMoodView();
+  void showPlayView();
+  
+  void showWatchlistView();
   
   HomeScreenPresenter getPresenter();
   

@@ -13,13 +13,9 @@
 
   <TextView
     android:id="@android:id/text2"
-    style="@style/InfoBox.TextView"
+    style="@style/InfoBox.TextView.Sub"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@android:id/text1"
-    android:layout_marginTop="10dp"
-    android:textAppearance="@style/TextAppearance.InfoBox.Small"
-    android:textColor="@color/gold"
     android:text="@string/help_text_tap_here" />
 
 </RelativeLayout>

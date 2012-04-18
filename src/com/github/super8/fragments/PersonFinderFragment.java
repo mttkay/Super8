@@ -30,58 +30,12 @@ import com.github.super8.adapters.PersonListAdapter;
 import com.github.super8.apis.tmdb.v3.DefaultTmdbApiHandler;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.apis.tmdb.v3.TmdbApiHandler;
-import com.github.super8.model.CastAppearance;
-import com.github.super8.model.Credits;
-import com.github.super8.model.CrewAppearance;
 import com.github.super8.model.Person;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
-public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
+public class PersonFinderFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
     TextWatcher, Handler.Callback {
-
-  static class GetCreditsHandler extends DefaultTmdbApiHandler<Credits> {
-
-    public GetCreditsHandler(Context context) {
-      super(context);
-    }
-
-    @Override
-    public boolean onTaskSuccess(Context context, Credits result) {
-      System.out.println("New credits: " + result.getTmdbId());
-      System.out.println("CAST:");
-      for (CastAppearance app : result.getCastAppearances()) {
-        System.out.println(app.getMovieTitle());
-      }
-      System.out.println("CREW:");
-      for (CrewAppearance app : result.getCrewAppearances()) {
-        System.out.println(app.getMovieTitle());
-      }
-      return super.onTaskSuccess(context, result);
-    }
-  }
-
-  static class GetPersonHandler extends DefaultTmdbApiHandler<Person> {
-
-    public GetPersonHandler(Context context) {
-      super(context);
-    }
-
-    @Override
-    public boolean onTaskSuccess(Context context, Person person) {
-      FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-      FragmentTransaction tx = fragmentManager.beginTransaction();
-      //tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-      PersonDetailsFragment fragment = new PersonDetailsFragment();
-      Bundle args = new Bundle();
-      args.putParcelable(PersonDetailsFragment.PERSON_EXTRA, person);
-      fragment.setArguments(args);
-      tx.replace(R.id.drawer_content, fragment);
-      tx.addToBackStack(null);
-      tx.commit();
-      return true;
-    }
-  }
 
   private static final int QUERY_DELAY = 500;
   private static final int QUERY_READY_MSG = 0;
@@ -99,7 +53,7 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
   private PersonListAdapter adapter;
   private Handler queryReadyHandler;
 
-  public LearnMoviesFragment() {
+  public PersonFinderFragment() {
     setRetainInstance(true);
   }
 
@@ -117,7 +71,7 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.learn_movies_fragment, null);
+    return inflater.inflate(R.layout.person_finder_fragment, null);
   }
 
   @Override
@@ -232,5 +186,27 @@ public class LearnMoviesFragment extends RoboListFragment implements TmdbApiHand
 
   @Override
   public void setContext(Context arg0) {
+  }
+
+  static class GetPersonHandler extends DefaultTmdbApiHandler<Person> {
+
+    public GetPersonHandler(Context context) {
+      super(context);
+    }
+
+    @Override
+    public boolean onTaskSuccess(Context context, Person person) {
+      FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+      FragmentTransaction tx = fragmentManager.beginTransaction();
+      // tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      PersonDetailsFragment fragment = new PersonDetailsFragment();
+      Bundle args = new Bundle();
+      args.putParcelable(PersonDetailsFragment.PERSON_EXTRA, person);
+      fragment.setArguments(args);
+      tx.replace(R.id.drawer_content, fragment);
+      tx.addToBackStack(null);
+      tx.commit();
+      return true;
+    }
   }
 }
