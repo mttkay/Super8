@@ -1,0 +1,2 @@
+#!/bin/sh
+adb shell sqlite3 data/data/com.github.super8/databases/library.db
