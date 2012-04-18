@@ -1,7 +1,5 @@
 package com.github.super8.apis.tmdb.v3;
 
-import org.json.JSONException;
-
 import com.github.ignition.support.http.IgnitedHttp;
 import com.github.ignition.support.http.IgnitedHttpResponse;
 import com.github.super8.apis.ServerCommunicationException;
@@ -18,10 +16,10 @@ public class TmdbFetchOneTask<ModelT extends TmdbRecord> extends TmdbApiTask<Mod
   }
 
   @Override
-  protected ModelT handleResponse(IgnitedHttpResponse response) throws Exception {
+  protected ModelT handleResponse(IgnitedHttpResponse response) throws ServerCommunicationException {
     try {
       return parser.parseOne(response.getResponseBodyAsString());
-    } catch (JSONException e) {
+    } catch (Exception e) {
       throw new ServerCommunicationException(e);
     }
   }

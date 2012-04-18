@@ -60,4 +60,8 @@ public class LibraryManager {
   public void deletePerson(Person person) {
     personDao.delete(person);
   }
+  
+  public boolean hasPerson(Person person) {
+    return personDao.count(PersonTable.Columns._ID + "=" + person.getTmdbId()) > 0;
+  }
 }

@@ -7,7 +7,10 @@
   <string name="help_text_tap_here">Tap the lens to begin.</string>
   <string name="help_text_in_like_mode_1">You\'re in learning mode.</string>
   <string name="help_text_in_like_mode_2">Pull the handle and tell me artists you like. Tap the heart again to end.</string>
+  <string name="help_text_suggestions_available">I have suggestions for you!</string>
+  <string name="help_text_suggestions_howto">Shake me or pull the handle up and down to see the next suggestion.</string>
   <string name="like_artist_or_director_hint">e.g. \"Chris Nolan\" or \"Brad Pitt\"</string>
   <string name="person_loading">Loading…</string>
   <string name="empty_list">No Results</string>
+
 </resources>

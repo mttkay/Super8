@@ -28,6 +28,8 @@
       </intent-filter>
     </activity>
     <activity android:name=".activities.SearchResultActivity" />
+    
+    <service android:name=".services.ImportFilmographyService"/>
   </application>
 
 </manifest>

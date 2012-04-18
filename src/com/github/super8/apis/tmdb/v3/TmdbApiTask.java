@@ -22,7 +22,7 @@ public abstract class TmdbApiTask<ModelT> extends IgnitedAsyncTask<Context, Stri
   }
 
   @Override
-  public ModelT run(String... params) throws Exception {
+  public ModelT run(String... params) throws TmdbError, ServerCommunicationException {
     String url = params[0];
     try {
       Log.d(LOG_TAG, "url: " + url);
@@ -46,6 +46,7 @@ public abstract class TmdbApiTask<ModelT> extends IgnitedAsyncTask<Context, Stri
     return true;
   }
 
-  protected abstract ModelT handleResponse(IgnitedHttpResponse response) throws Exception;
+  protected abstract ModelT handleResponse(IgnitedHttpResponse response)
+      throws ServerCommunicationException;
 
 }

@@ -2,8 +2,6 @@ package com.github.super8.apis.tmdb.v3;
 
 import java.util.List;
 
-import org.json.JSONException;
-
 import com.github.ignition.support.http.IgnitedHttp;
 import com.github.ignition.support.http.IgnitedHttpResponse;
 import com.github.super8.apis.ServerCommunicationException;
@@ -20,10 +18,11 @@ public class TmdbFetchManyTask<ModelT extends TmdbRecord> extends TmdbApiTask<Li
   }
 
   @Override
-  protected List<ModelT> handleResponse(IgnitedHttpResponse response) throws Exception {
+  protected List<ModelT> handleResponse(IgnitedHttpResponse response)
+      throws ServerCommunicationException {
     try {
       return parser.parseList(response.getResponseBodyAsString());
-    } catch (JSONException e) {
+    } catch (Exception e) {
       throw new ServerCommunicationException(e);
     }
   }

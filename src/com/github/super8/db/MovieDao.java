@@ -7,7 +7,7 @@ import com.github.super8.model.Movie;
 
 public class MovieDao extends AbstractDao<Movie> {
 
-  private static final String INSERT = "INSERT INTO " + MovieTable.NAME + " ("
+  private static final String INSERT = "INSERT OR REPLACE INTO " + MovieTable.NAME + " ("
       + MovieTable.Columns._ID + "," + MovieTable.Columns.STATE + ") VALUES (?,?)";
 
   public MovieDao(SQLiteDatabase db) {

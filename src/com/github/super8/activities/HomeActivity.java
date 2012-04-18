@@ -4,7 +4,9 @@ import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
@@ -12,22 +14,24 @@ import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.ToggleButton;
 
 import com.github.super8.R;
+import com.github.super8.apis.tmdb.v3.DefaultTmdbApiHandler;
 import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
 import com.github.super8.fragments.InfoBoxFragment;
-import com.github.super8.fragments.LearnMoviesFragment;
+import com.github.super8.fragments.MovieDetailsFragment;
+import com.github.super8.fragments.PersonFinderFragment;
+import com.github.super8.model.Movie;
+import com.google.inject.Inject;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen {
 
-  private HomeScreenPresenter presenter = new HomeScreenPresenter();
-
+  @Inject private HomeScreenPresenter presenter;
+  @Inject private PersonFinderFragment personFinderFragment;
+  @Inject private MovieDetailsFragment movieDetailsFragment;
   @InjectView(R.id.drawer) private SlidingDrawer drawer;
-
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
-
-  // @InjectFragment(R.id.drawer_fragment) private LearnMoviesFragment learnFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +40,6 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     setContentView(R.layout.home);
 
     presenter.bind(this);
-
-    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-    tx.add(R.id.drawer_content, new LearnMoviesFragment());
-    tx.commit();
 
     drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
 
@@ -77,19 +77,39 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     drawer.animateClose();
   }
 
-  @Override
-  public void showNoLikesView(boolean firstTime) {
-    infoboxFragment.showWelcomeView(firstTime);
+  public void setDrawerContentFragment(Fragment fragment) {
+    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+    tx.add(R.id.drawer_content, fragment);
+    tx.commit();
   }
 
   @Override
-  public void showLikeModeView() {
-    infoboxFragment.showLikeModeView();
+  public void showWelcomeView(boolean animate) {
+    if (animate) {
+      infoboxFragment.animateContentView(InfoBoxFragment.CONTENT_WELCOME);
+    } else {
+      infoboxFragment.setContentView(InfoBoxFragment.CONTENT_WELCOME);
+    }
   }
 
   @Override
-  public void showMoodView() {
-    infoboxFragment.showMoodView();
+  public void showRecordView() {
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_RECORD);
+    setDrawerContentFragment(personFinderFragment);
+  }
+
+  @Override
+  public void showPlayView() {
+    hideSlidingDrawer();
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_PLAY);
+    setDrawerContentFragment(movieDetailsFragment);
+    movieDetailsFragment.loadNextSuggestion(new SuggestionLoadedHandler(this));
+  }
+
+  @Override
+  public void showWatchlistView() {
+    // TODO Auto-generated method stub
+
   }
 
   public void onLikeModeButtonClicked(View view) {
@@ -100,9 +120,9 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     anim.setDuration(500);
     anim.start();
     if (button.isChecked()) {
-      presenter.likeMode();
+      presenter.enterRecordingMode();
     } else {
-      presenter.welcomeMode(false);
+      presenter.start(true);
     }
   }
 
@@ -112,6 +132,27 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
       closeSlidingDrawer();
     } else {
       super.onBackPressed();
+    }
+  }
+  
+  public static class SuggestionLoadedHandler extends DefaultTmdbApiHandler<Movie> {
+
+    public SuggestionLoadedHandler(Context context) {
+      super(context);
+    }
+
+    @Override
+    public boolean onTaskStarted(Context context) {
+      HomeActivity activity = (HomeActivity) context;
+      activity.hideSlidingDrawer();
+      return super.onTaskStarted(context);
+    }
+    
+    @Override
+    public boolean onTaskSuccess(Context context, Movie result) {
+      HomeActivity activity = (HomeActivity) context;
+      activity.showSlidingDrawer();
+      return super.onTaskSuccess(context, result);
     }
   }
 }

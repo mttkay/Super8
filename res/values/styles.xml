@@ -51,7 +51,7 @@
   </style>
 
   <style name="TextAppearance.InfoBox.Small" parent="android:TextAppearance">
-    <item name="android:textColor">#FFF</item>
+    <item name="android:textColor">@color/gold</item>
     <item name="android:textSize">18sp</item>
   </style>
 
@@ -66,5 +66,11 @@
     <item name="android:gravity">center</item>
     <item name="android:layout_centerHorizontal">true</item>
   </style>
+  
+  <style name="InfoBox.TextView.Sub" parent="InfoBox.TextView">
+    <item name="android:textAppearance">@style/TextAppearance.InfoBox.Small</item>
+    <item name="android:layout_marginTop">10dp</item>
+    <item name="android:layout_below">@android:id/text1</item>
+  </style>  
 
 </resources>

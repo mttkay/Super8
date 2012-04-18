@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import com.github.ignition.support.http.IgnitedHttp;
+import com.github.super8.apis.ServerCommunicationException;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbCreditsParser;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbMovieParser;
 import com.github.super8.apis.tmdb.v3.parsers.TmdbPersonParser;
@@ -12,9 +13,7 @@ import com.github.super8.model.Credits;
 import com.github.super8.model.Movie;
 import com.github.super8.model.Person;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-@Singleton
 public class TmdbApi {
 
   public static final int DEFAULT_PAGE_SIZE = 20;
@@ -39,6 +38,11 @@ public class TmdbApi {
     task.connect(handler);
     task.execute(ENDPOINT + "/movie/" + id + "?api_key=" + API_KEY);
     return task;
+  }
+
+  public Movie getMovie(int id) throws ServerCommunicationException, TmdbError {
+    TmdbFetchOneTask<Movie> task = new TmdbFetchOneTask<Movie>(http, new TmdbMovieParser());
+    return task.run(ENDPOINT + "/movie/" + id + "?api_key=" + API_KEY);
   }
 
   public TmdbApiTask<List<Movie>> searchMovie(TmdbApiHandler<List<Movie>> handler, String query) {
@@ -67,6 +71,11 @@ public class TmdbApi {
     task.connect(handler);
     task.execute(ENDPOINT + "/person/" + personId + "/credits?api_key=" + API_KEY);
     return task;
+  }
+
+  public Credits getCredits(int personId) throws TmdbError, ServerCommunicationException {
+    TmdbFetchOneTask<Credits> task = new TmdbFetchOneTask<Credits>(http, new TmdbCreditsParser());
+    return task.run(ENDPOINT + "/person/" + personId + "/credits?api_key=" + API_KEY);
   }
 
   private String searchUrl(String resource, String query) {
