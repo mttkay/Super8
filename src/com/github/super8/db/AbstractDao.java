@@ -25,6 +25,10 @@ public abstract class AbstractDao<T extends TmdbRecord> {
   }
 
   public abstract int save(T model);
+  
+  public int update(T model) {
+    return 0;
+  }
 
   public boolean delete(T model) {
     int rowsDeleted = db.delete(tableName, BaseColumns._ID + " = ?",

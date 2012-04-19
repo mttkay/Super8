@@ -45,6 +45,21 @@ public class LibraryManager {
     return movieDao.count(MovieTable.Columns.STATE + "=" + Movie.STATE_MUST_SEE);
   }
   
+  public void addToWatchlist(Movie movie) {
+    movie.setState(Movie.STATE_MUST_SEE);
+    movieDao.update(movie);
+  }
+  
+  public void markAsSeen(Movie movie) {
+    movie.setState(Movie.STATE_SEEN_IT);
+    movieDao.update(movie);
+  }
+  
+  public void ignoreMovie(Movie movie) {
+    movie.setState(Movie.STATE_IGNORE);
+    movieDao.update(movie);
+  }
+  
   public List<Movie> getMovieSuggestions() {
     return movieDao.getAll(MovieTable.Columns.STATE + "=" + Movie.STATE_DEFAULT);
   }
