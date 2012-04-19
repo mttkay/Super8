@@ -33,10 +33,11 @@ public class TmdbApi {
     http.setDefaultHeader("Accept", FORMAT);
   }
 
-  public TmdbApiTask<Movie> getMovie(TmdbApiHandler<Movie> handler, int id) {
-    TmdbFetchOneTask<Movie> task = new TmdbFetchOneTask<Movie>(http, new TmdbMovieParser());
+  public TmdbApiTask<Movie> backfillMovie(TmdbApiHandler<Movie> handler, Movie targetMovie) {
+    TmdbFetchOneTask<Movie> task = new TmdbFetchOneTask<Movie>(http, new TmdbMovieParser(),
+        targetMovie);
     task.connect(handler);
-    task.execute(ENDPOINT + "/movie/" + id + "?api_key=" + API_KEY);
+    task.execute(ENDPOINT + "/movie/" + targetMovie.getTmdbId() + "?api_key=" + API_KEY);
     return task;
   }
 

@@ -9,16 +9,22 @@ import com.github.super8.model.TmdbRecord;
 public class TmdbFetchOneTask<ModelT extends TmdbRecord> extends TmdbApiTask<ModelT> {
 
   private TmdbParser<ModelT> parser;
+  private ModelT targetModel;
 
   public TmdbFetchOneTask(IgnitedHttp http, TmdbParser<ModelT> parser) {
     super(http);
     this.parser = parser;
   }
 
+  public TmdbFetchOneTask(IgnitedHttp http, TmdbParser<ModelT> parser, ModelT targetModel) {
+    this(http, parser);
+    this.targetModel = targetModel;
+  }
+
   @Override
   protected ModelT handleResponse(IgnitedHttpResponse response) throws ServerCommunicationException {
     try {
-      return parser.parseOne(response.getResponseBodyAsString());
+      return parser.parseOne(response.getResponseBodyAsString(), targetModel);
     } catch (Exception e) {
       throw new ServerCommunicationException(e);
     }

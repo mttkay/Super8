@@ -14,8 +14,10 @@ import com.github.super8.model.CrewAppearance;
 public class TmdbCreditsParser extends TmdbParser<Credits> {
 
   @Override
-  public Credits parseModel(JSONObject modelObject) throws JSONException {
-    Credits credits = new Credits();
+  public Credits parseModel(JSONObject modelObject, Credits credits) throws JSONException {
+    if (credits == null) {
+      credits = new Credits();
+    }
     if (modelObject.has("cast")) {
       credits.setCastAppearances(parseCastAppearances(modelObject));
     }
@@ -53,7 +55,7 @@ public class TmdbCreditsParser extends TmdbParser<Credits> {
     }
     return appearances;
   }
-  
+
   private void parseAppearanceFields(JSONObject jsonObject, Appearance appearance)
       throws JSONException {
     appearance.setTmdbId(jsonObject.getInt("id"));

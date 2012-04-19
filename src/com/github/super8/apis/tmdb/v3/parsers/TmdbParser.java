@@ -16,7 +16,6 @@ import android.text.TextUtils;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.model.TmdbRecord;
 
-
 public abstract class TmdbParser<ModelT extends TmdbRecord> {
 
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
@@ -26,22 +25,23 @@ public abstract class TmdbParser<ModelT extends TmdbRecord> {
     JSONArray personArray = responseObject.getJSONArray("results");
     ArrayList<ModelT> modelList = new ArrayList<ModelT>(TmdbApi.DEFAULT_PAGE_SIZE);
     for (int i = 0; i < personArray.length(); i++) {
-      modelList.add(parseOne(personArray.getJSONObject(i)));
+      modelList.add(parseOne(personArray.getJSONObject(i), null));
     }
     return modelList;
   }
 
-  public ModelT parseOne(String json) throws JSONException {
-    return parseOne(new JSONObject(json));
+  public ModelT parseOne(String json, ModelT targetModel) throws JSONException {
+    return parseOne(new JSONObject(json), targetModel);
   }
 
-  private ModelT parseOne(JSONObject modelObject) throws JSONException {
-    ModelT model = parseModel(modelObject);
+  private ModelT parseOne(JSONObject modelObject, ModelT targetModel) throws JSONException {
+    ModelT model = parseModel(modelObject, targetModel);
     model.setTmdbId(modelObject.getInt("id"));
     return model;
   }
-  
-  public abstract ModelT parseModel(JSONObject modelObject) throws JSONException;
+
+  public abstract ModelT parseModel(JSONObject modelObject, ModelT targetModel)
+      throws JSONException;
 
   protected Date parseDate(String date) {
     if (TextUtils.isEmpty(date)) {
