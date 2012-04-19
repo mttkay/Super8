@@ -1,5 +1,7 @@
 package com.github.super8.behavior;
 
+import com.github.super8.fragments.MovieDetailsFragment;
+
 public interface ActsAsHomeScreen extends Behavior {
 
   void showSlidingDrawer();
@@ -19,5 +21,6 @@ public interface ActsAsHomeScreen extends Behavior {
   void showWatchlistView();
   
   HomeScreenPresenter getPresenter();
-  
+
+  MovieDetailsFragment getMovieDetailsFragment();
 }

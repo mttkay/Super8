@@ -5,27 +5,28 @@ import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
-import android.widget.SlidingDrawer.OnDrawerOpenListener;
 import android.widget.ToggleButton;
 
 import com.github.super8.R;
-import com.github.super8.apis.tmdb.v3.DefaultTmdbApiHandler;
 import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
 import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.MovieDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
-import com.github.super8.model.Movie;
+import com.github.super8.gestures.ShakeDetector;
+import com.github.super8.gestures.ShakeDetector.OnShakeListener;
 import com.google.inject.Inject;
 import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
-public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen {
+public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen, OnShakeListener {
 
   @Inject private HomeScreenPresenter presenter;
   @Inject private PersonFinderFragment personFinderFragment;
@@ -33,26 +34,45 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   @InjectView(R.id.drawer) private SlidingDrawer drawer;
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
 
+  private ShakeDetector shakeDetector;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    shakeDetector = new ShakeDetector();
+    shakeDetector.setOnShakeListener(this);
 
     setContentView(R.layout.home);
 
     presenter.bind(this);
 
-    drawer.setOnDrawerOpenListener(new OnDrawerOpenListener() {
+    drawer.setOnDrawerCloseListener(presenter);
+  }
 
-      @Override
-      public void onDrawerOpened() {
-
-      }
-    });
+  @Override
+  protected void onResume() {
+    super.onResume();
+    SensorManager sensors = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    sensors.registerListener(shakeDetector, sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+        SensorManager.SENSOR_DELAY_UI);
+  }
+  
+  @Override
+  protected void onPause() {
+    super.onPause();
+    SensorManager sensors = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    sensors.unregisterListener(shakeDetector);
   }
 
   @Override
   public HomeScreenPresenter getPresenter() {
     return presenter;
+  }
+
+  @Override
+  public MovieDetailsFragment getMovieDetailsFragment() {
+    return movieDetailsFragment;
   }
 
   @Override
@@ -103,7 +123,6 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     hideSlidingDrawer();
     infoboxFragment.setContentView(InfoBoxFragment.CONTENT_PLAY);
     setDrawerContentFragment(movieDetailsFragment);
-    movieDetailsFragment.loadNextSuggestion(new SuggestionLoadedHandler(this));
   }
 
   @Override
@@ -134,25 +153,9 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
       super.onBackPressed();
     }
   }
-  
-  public static class SuggestionLoadedHandler extends DefaultTmdbApiHandler<Movie> {
 
-    public SuggestionLoadedHandler(Context context) {
-      super(context);
-    }
-
-    @Override
-    public boolean onTaskStarted(Context context) {
-      HomeActivity activity = (HomeActivity) context;
-      activity.hideSlidingDrawer();
-      return super.onTaskStarted(context);
-    }
-    
-    @Override
-    public boolean onTaskSuccess(Context context, Movie result) {
-      HomeActivity activity = (HomeActivity) context;
-      activity.showSlidingDrawer();
-      return super.onTaskSuccess(context, result);
-    }
+  @Override
+  public void onShake() {
+    closeSlidingDrawer();
   }
 }

@@ -26,6 +26,10 @@ public abstract class TaskManagingFragment<ReturnT> extends RoboFragment impleme
   }
 
   @Override
+  public void setContext(Context context) {
+  }
+  
+  @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     taskManager.reconnectTasks(this);

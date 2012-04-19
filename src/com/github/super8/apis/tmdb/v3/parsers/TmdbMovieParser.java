@@ -21,7 +21,7 @@ public class TmdbMovieParser extends TmdbParser<Movie> {
     }
     String posterPath = modelObject.getString("poster_path");
     if (!"null".equals(posterPath)) {
-      movie.setPosterPath(posterPath);
+      movie.setImagePath(posterPath);
     }
 
     // these fields are only available for a full person request

@@ -6,48 +6,61 @@
   android:background="@color/translucent_black"
   android:padding="20dp" >
 
+  <TextView
+    android:id="@+id/movie_details_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/TextAppearance.Medium" />
+
   <com.github.ignition.core.widgets.RemoteImageView
-    android:id="@+id/movie_poster"
+    android:id="@+id/movie_details_poster"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_below="@id/movie_details_title"
     android:layout_centerHorizontal="true"
     android:scaleType="centerCrop"
     ignition:autoLoad="false" />
 
-  <ToggleButton
-    android:id="@+id/movie_details_watchlist_button"
+  <RadioGroup android:id="@+id/movie_details_state_buttons"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
-    android:text="Must see!"
-    android:textOff="@null"
-    android:textOn="@null" />
+    android:orientation="vertical" >
 
-  <ToggleButton
-    android:id="@+id/movie_details_seen_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_below="@id/movie_details_watchlist_button"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="3dp"
-    android:text="Seen it!"
-    android:textOff="@null"
-    android:textOn="@null" />
+    <RadioButton
+      android:id="@+id/movie_details_watchlist_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="10dp"
+      android:text="Must see!"
+      android:textOff="@null"
+      android:textOn="@null" />
 
-  <ToggleButton
-    android:id="@+id/movie_details_ignore_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_below="@id/movie_details_seen_button"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="3dp"
-    android:text="Hate it!"
-    android:textOff="@null"
-    android:textOn="@null" />
+    <RadioButton
+      android:id="@+id/movie_details_seen_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/movie_details_watchlist_button"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="3dp"
+      android:text="Seen it!"
+      android:textOff="@null"
+      android:textOn="@null" />
+
+    <RadioButton
+      android:id="@+id/movie_details_ignore_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/movie_details_seen_button"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="3dp"
+      android:text="Hate it!"
+      android:textOff="@null"
+      android:textOn="@null" />
+  </RadioGroup>
 
 </RelativeLayout>
