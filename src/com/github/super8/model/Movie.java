@@ -2,7 +2,7 @@ package com.github.super8.model;
 
 import java.util.Date;
 
-public class Movie extends TmdbRecord {
+public class Movie extends ImageRecord {
 
   public static final int STATE_DEFAULT = 0;
   public static final int STATE_SEEN_IT = 1;
@@ -11,7 +11,6 @@ public class Movie extends TmdbRecord {
   
   // TMDB attributes
   private String imdbId, title;
-  private String backdropPath, posterPath;
   private Date releaseDate;
   
   // other attributes
@@ -41,22 +40,6 @@ public class Movie extends TmdbRecord {
     this.releaseDate = releaseDate;
   }
 
-  public String getBackdropPath() {
-    return backdropPath;
-  }
-
-  public void setBackdropPath(String backdropPath) {
-    this.backdropPath = backdropPath;
-  }
-
-  public String getPosterPath() {
-    return posterPath;
-  }
-
-  public void setPosterPath(String posterPath) {
-    this.posterPath = posterPath;
-  }
-  
   public int getState() {
     return state;
   }

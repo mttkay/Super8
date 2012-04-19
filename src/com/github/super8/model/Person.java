@@ -2,15 +2,12 @@ package com.github.super8.model;
 
 import java.util.Date;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.github.super8.apis.tmdb.v3.TmdbApi;
+public class Person extends ImageRecord {
 
-public class Person extends TmdbRecord {
-
-  private String name, biography, imagePath, scaledImageUrl;
+  private String name, biography;
   private Date birthday;
 
   public String getName() {
@@ -35,28 +32,6 @@ public class Person extends TmdbRecord {
 
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
-  }
-
-  public void setImagePath(String imagePath) {
-    this.imagePath = imagePath;
-  }
-
-  public String getImagePath() {
-    return imagePath;
-  }
-
-  public String getScaledImageUrl(Context context) {
-    if (scaledImageUrl == null && imagePath != null) {
-      String sizeSpec = null;
-      // if (IgnitedScreens.getScreenDensity(context) > IgnitedScreens.SCREEN_DENSITY_MEDIUM) {
-      sizeSpec = "w185";
-      // } else {
-      // sizeSpec = "w45";
-      // }
-      scaledImageUrl = TmdbApi.IMAGE_BASE_URL + sizeSpec + imagePath;
-    }
-
-    return scaledImageUrl;
   }
 
   @Override
@@ -87,8 +62,6 @@ public class Person extends TmdbRecord {
     if (epoch > -1) {
       this.birthday = new Date(epoch);
     }
-    this.imagePath = source.readString();
-    this.scaledImageUrl = source.readString();
   }
 
   @Override
@@ -101,8 +74,6 @@ public class Person extends TmdbRecord {
     } else {
       dest.writeLong(-1);
     }
-    dest.writeString(imagePath);
-    dest.writeString(scaledImageUrl);
   }
 
 }
