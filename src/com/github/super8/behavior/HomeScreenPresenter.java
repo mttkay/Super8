@@ -8,13 +8,13 @@ import com.google.inject.Inject;
 
 public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawerCloseListener {
 
-  public enum Mode {
-    WELCOME, RECORD, PLAY
+  public enum State {
+    WATCHLIST_EMPTY, WATCHLIST_AVAILABLE, RECORD, PLAY;
   }
 
   private ActsAsHomeScreen homeScreen;
   private LibraryManager library;
-  private Mode mode = Mode.WELCOME;
+  private State state = State.WATCHLIST_EMPTY;
 
   @Inject
   public HomeScreenPresenter(LibraryManager library) {
@@ -25,42 +25,43 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   public void bind(ActsAsHomeScreen behavior) {
     this.homeScreen = behavior;
 
-    start(false);
+    powerOff();
   }
 
-  public void start(boolean animateView) {
-    if (watchlistNotEmpty()) {
-      // populate watchlist
-    } else if (suggestionsAvailable()) {
-      enterPlaybackMode();
+  public void powerOff() {
+    homeScreen.hideSlidingDrawer();
+    homeScreen.disableControlPanel();
+    if (library.hasWatchlistItems()) {
+      homeScreen.showWatchlistView();
+      state = State.WATCHLIST_AVAILABLE;
     } else {
-      homeScreen.hideSlidingDrawer();
-      homeScreen.showWelcomeView(animateView);
+      homeScreen.showWatchlistEmptyView();
+      state = State.WATCHLIST_EMPTY;
     }
   }
 
-  public Mode getMode() {
-    return mode;
+  public void powerOn() {
+    homeScreen.showSlidingDrawer();
+    homeScreen.enableControlPanel();
+    if (library.hasSuggestions()) {
+      enterPlaybackMode();
+    } else {
+      enterRecordingMode();
+    }
+  }
+
+  public State getState() {
+    return state;
   }
 
   public void enterRecordingMode() {
-    homeScreen.showSlidingDrawer();
     homeScreen.showRecordView();
-    mode = Mode.RECORD;
+    state = State.RECORD;
   }
 
   public void enterPlaybackMode() {
-    homeScreen.showSlidingDrawer();
     homeScreen.showPlayView();
-    mode = Mode.PLAY;
-  }
-
-  private boolean watchlistNotEmpty() {
-    return library.getWatchlistSize() > 0;
-  }
-
-  private boolean suggestionsAvailable() {
-    return library.getSuggestionsCount() > 0;
+    state = State.PLAY;
   }
 
   public void getNextMovieSuggestion() {
@@ -71,14 +72,14 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
 
   public void onMovieSuggestionAvailable() {
     homeScreen.showSlidingDrawer();
-    //homeScreen.openSlidingDrawer();
+    // homeScreen.openSlidingDrawer();
   }
 
   @Override
   public void onDrawerClosed() {
-    if (mode == Mode.PLAY) {
+    if (state == State.PLAY) {
       getNextMovieSuggestion();
-    } else if (mode == Mode.RECORD && suggestionsAvailable()) {
+    } else if (state == State.RECORD && library.hasSuggestions()) {
       enterPlaybackMode();
     }
   }

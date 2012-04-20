@@ -18,9 +18,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 
 public class InfoBoxFragment extends RoboFragment {
 
-  public static final int CONTENT_WELCOME = 0;
-  public static final int CONTENT_RECORD = 1;
-  public static final int CONTENT_PLAY = 2;
+  public static final int CONTENT_HELP_TEXT = 0;
 
   private ViewFlipper flipper;
   private Typeface font;
@@ -37,21 +35,25 @@ public class InfoBoxFragment extends RoboFragment {
     View layout = inflater.inflate(R.layout.info_box_fragment, container);
 
     flipper = (ViewFlipper) layout.findViewById(R.id.view_flipper);
-    flipper.addView(inflater.inflate(R.layout.flipper_content_welcome, flipper, false));
-    flipper.addView(inflater.inflate(R.layout.flipper_content_record, flipper, false));
-    flipper.addView(inflater.inflate(R.layout.flipper_content_play, flipper, false));
-
-    for (int i = 0; i < 3; i++) {
-      View infoBox = flipper.getChildAt(i);
-      TextView textView = (TextView) infoBox.findViewById(android.R.id.text1);
-      textView.setTypeface(font);
-      textView = (TextView) infoBox.findViewById(android.R.id.text2);
-      textView.setTypeface(font, Typeface.BOLD);
-    }
+    View helpContent = inflater.inflate(R.layout.flipper_content_help_text, flipper, false);
+    TextView textView = (TextView) helpContent.findViewById(android.R.id.text1);
+    textView.setTypeface(font);
+    textView = (TextView) helpContent.findViewById(android.R.id.text2);
+    textView.setTypeface(font, Typeface.BOLD);
+    
+    flipper.addView(helpContent);
 
     return layout;
   }
 
+  public void setHelpText(int firstLine, int secondLine) {
+    View helpContent = flipper.getChildAt(CONTENT_HELP_TEXT);
+    TextView text1 = (TextView) helpContent.findViewById(android.R.id.text1);
+    text1.setText(firstLine);
+    TextView text2 = (TextView) helpContent.findViewById(android.R.id.text2);
+    text2.setText(secondLine);
+  }
+  
   public void setContentView(int which) {
     flipper.setDisplayedChild(which);
   }

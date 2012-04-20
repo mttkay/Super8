@@ -12,19 +12,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
-import android.widget.ToggleButton;
 
 import com.github.super8.R;
 import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
+import com.github.super8.fragments.HeaderFragment;
 import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.MovieDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
 import com.github.super8.gestures.ShakeDetector;
 import com.github.super8.gestures.ShakeDetector.OnShakeListener;
 import com.google.inject.Inject;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen, OnShakeListener {
 
@@ -32,6 +30,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   @Inject private PersonFinderFragment personFinderFragment;
   @Inject private MovieDetailsFragment movieDetailsFragment;
   @InjectView(R.id.drawer) private SlidingDrawer drawer;
+  @InjectFragment(R.id.header_fragment) private HeaderFragment headerFragment;
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
 
   private ShakeDetector shakeDetector;
@@ -57,7 +56,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     sensors.registerListener(shakeDetector, sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
         SensorManager.SENSOR_DELAY_UI);
   }
-  
+
   @Override
   protected void onPause() {
     super.onPause();
@@ -99,30 +98,8 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   public void setDrawerContentFragment(Fragment fragment) {
     FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-    tx.add(R.id.drawer_content, fragment);
+    tx.replace(R.id.drawer_content, fragment);
     tx.commit();
-  }
-
-  @Override
-  public void showWelcomeView(boolean animate) {
-    if (animate) {
-      infoboxFragment.animateContentView(InfoBoxFragment.CONTENT_WELCOME);
-    } else {
-      infoboxFragment.setContentView(InfoBoxFragment.CONTENT_WELCOME);
-    }
-  }
-
-  @Override
-  public void showRecordView() {
-    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_RECORD);
-    setDrawerContentFragment(personFinderFragment);
-  }
-
-  @Override
-  public void showPlayView() {
-    hideSlidingDrawer();
-    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_PLAY);
-    setDrawerContentFragment(movieDetailsFragment);
   }
 
   @Override
@@ -130,20 +107,44 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     // TODO Auto-generated method stub
 
   }
-
-  public void onLikeModeButtonClicked(View view) {
-    ToggleButton button = (ToggleButton) view;
-    AnimatorSet anim = new AnimatorSet();
-    anim.playTogether(ObjectAnimator.ofFloat(button, "scaleX", 1, 1.3f, 1),
-        ObjectAnimator.ofFloat(button, "scaleY", 1, 1.2f, 1));
-    anim.setDuration(500);
-    anim.start();
-    if (button.isChecked()) {
-      presenter.enterRecordingMode();
-    } else {
-      presenter.start(true);
-    }
+  
+  @Override
+  public void showWatchlistEmptyView() {
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
+    infoboxFragment.setHelpText(R.string.help_text_empty_watchlist_1,
+        R.string.help_text_empty_watchlist_2);
   }
+
+  @Override
+  public void showRecordView() {
+    headerFragment.showRecordView();
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
+    infoboxFragment.setHelpText(R.string.help_text_in_like_mode_1,
+        R.string.help_text_in_like_mode_2);
+    setDrawerContentFragment(personFinderFragment);
+  }
+
+  @Override
+  public void showPlayView() {
+    headerFragment.showPlayView();
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
+    infoboxFragment.setHelpText(R.string.help_text_suggestions_1, R.string.help_text_suggestions_2);
+    setDrawerContentFragment(movieDetailsFragment);
+  }
+
+//  public void onLikeModeButtonClicked(View view) {
+//    ToggleButton button = (ToggleButton) view;
+//    AnimatorSet anim = new AnimatorSet();
+//    anim.playTogether(ObjectAnimator.ofFloat(button, "scaleX", 1, 1.3f, 1),
+//        ObjectAnimator.ofFloat(button, "scaleY", 1, 1.2f, 1));
+//    anim.setDuration(500);
+//    anim.start();
+//    if (button.isChecked()) {
+//      presenter.enterRecordingMode();
+//    } else {
+//      presenter.powerOff();
+//    }
+//  }
 
   @Override
   public void onBackPressed() {
@@ -157,5 +158,15 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   @Override
   public void onShake() {
     closeSlidingDrawer();
+  }
+
+  @Override
+  public void disableControlPanel() {
+    headerFragment.disableControlPanel();
+  }
+  
+  @Override
+  public void enableControlPanel() {
+    headerFragment.enableControlPanel();
   }
 }

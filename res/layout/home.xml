@@ -14,6 +14,7 @@
     android:orientation="vertical" >
 
     <fragment
+      android:id="@+id/header_fragment"
       android:name="com.github.super8.fragments.HeaderFragment"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />

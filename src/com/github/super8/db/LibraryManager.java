@@ -45,6 +45,10 @@ public class LibraryManager {
     return movieDao.count(MovieTable.Columns.STATE + "=" + Movie.STATE_MUST_SEE);
   }
   
+  public boolean hasWatchlistItems() {
+    return getWatchlistSize() > 0;
+  }
+  
   public void addToWatchlist(Movie movie) {
     movie.setState(Movie.STATE_MUST_SEE);
     movieDao.update(movie);
@@ -66,6 +70,10 @@ public class LibraryManager {
   
   public int getSuggestionsCount() {
     return movieDao.count(MovieTable.Columns.STATE + "=" + Movie.STATE_DEFAULT);
+  }
+  
+  public boolean hasSuggestions() {
+    return getSuggestionsCount() > 0;
   }
 
   public void savePerson(Person person) {
