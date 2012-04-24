@@ -104,8 +104,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
   @Override
   public void showWatchlistView() {
-    // TODO Auto-generated method stub
-
+    infoboxFragment.setContentView(InfoBoxFragment.CONTENT_WATCHLIST);
   }
   
   @Override

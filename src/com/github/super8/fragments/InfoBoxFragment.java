@@ -19,6 +19,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 public class InfoBoxFragment extends RoboFragment {
 
   public static final int CONTENT_HELP_TEXT = 0;
+  public static final int CONTENT_WATCHLIST = 1;
 
   private ViewFlipper flipper;
   private Typeface font;
@@ -35,13 +36,19 @@ public class InfoBoxFragment extends RoboFragment {
     View layout = inflater.inflate(R.layout.info_box_fragment, container);
 
     flipper = (ViewFlipper) layout.findViewById(R.id.view_flipper);
+    
+    // the info/help text that's guiding the user through the app
     View helpContent = inflater.inflate(R.layout.flipper_content_help_text, flipper, false);
     TextView textView = (TextView) helpContent.findViewById(android.R.id.text1);
     textView.setTypeface(font);
     textView = (TextView) helpContent.findViewById(android.R.id.text2);
     textView.setTypeface(font, Typeface.BOLD);
     
+    // the movie watchlist
+    View watchlistContent = inflater.inflate(R.layout.flipper_content_watchlist, flipper, false);
+    
     flipper.addView(helpContent);
+    flipper.addView(watchlistContent);
 
     return layout;
   }
