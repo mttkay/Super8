@@ -12,16 +12,19 @@ import android.widget.TextView;
 
 import com.github.ignition.core.widgets.RemoteImageView;
 import com.github.super8.R;
+import com.github.super8.db.LibraryManager;
 import com.github.super8.model.Movie;
 
 public class MovieGalleryAdapter extends BaseAdapter {
 
+  private LibraryManager library;
   private List<Movie> movies;
   private LayoutInflater inflater;
   private Context appContext;
 
-  public MovieGalleryAdapter(Activity activity, List<Movie> movies) {
-    this.movies = movies;
+  public MovieGalleryAdapter(Activity activity, LibraryManager library) {
+    this.library = library;
+    this.movies = library.getWatchlist();
     this.inflater = activity.getLayoutInflater();
     this.appContext = activity.getApplicationContext();
   }
@@ -39,6 +42,12 @@ public class MovieGalleryAdapter extends BaseAdapter {
   @Override
   public long getItemId(int position) {
     return position;
+  }
+  
+  @Override
+  public void notifyDataSetChanged() {
+    this.movies = library.getWatchlist();
+    super.notifyDataSetChanged();
   }
 
   @Override

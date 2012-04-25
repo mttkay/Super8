@@ -18,7 +18,7 @@ public class WatchlistFragment extends RoboFragment {
   @Inject private LibraryManager library;
 
   @InjectView(R.id.gallery) private Gallery gallery;
-  
+
   private MovieGalleryAdapter adapter;
 
   @Override
@@ -29,8 +29,11 @@ public class WatchlistFragment extends RoboFragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    adapter = new MovieGalleryAdapter(getActivity(), library.getWatchlist());
+    adapter = new MovieGalleryAdapter(getActivity(), library);
     gallery.setAdapter(adapter);
+  }
+
+  public void refresh() {
     adapter.notifyDataSetChanged();
   }
 }

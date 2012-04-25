@@ -25,7 +25,7 @@ public abstract class AbstractDao<T extends TmdbRecord> {
   }
 
   public abstract int save(T model);
-  
+
   public int update(T model) {
     return 0;
   }
@@ -76,5 +76,13 @@ public abstract class AbstractDao<T extends TmdbRecord> {
     int count = c.getInt(0);
     c.close();
     return count;
+  }
+
+  protected void bindOptString(int index, String value) {
+    if (value == null) {
+      insert.bindNull(index);
+    } else {
+      insert.bindString(index, value);
+    }
   }
 }

@@ -20,6 +20,7 @@ import com.github.super8.fragments.HeaderFragment;
 import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.MovieDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
+import com.github.super8.fragments.WatchlistFragment;
 import com.github.super8.gestures.ShakeDetector;
 import com.github.super8.gestures.ShakeDetector.OnShakeListener;
 import com.google.inject.Inject;
@@ -105,8 +106,11 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   @Override
   public void showWatchlistView() {
     infoboxFragment.setContentView(InfoBoxFragment.CONTENT_WATCHLIST);
+    WatchlistFragment watchlist = (WatchlistFragment) getSupportFragmentManager().findFragmentById(
+        R.id.watchlist_fragment);
+    watchlist.refresh();
   }
-  
+
   @Override
   public void showWatchlistEmptyView() {
     infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
@@ -131,19 +135,19 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     setDrawerContentFragment(movieDetailsFragment);
   }
 
-//  public void onLikeModeButtonClicked(View view) {
-//    ToggleButton button = (ToggleButton) view;
-//    AnimatorSet anim = new AnimatorSet();
-//    anim.playTogether(ObjectAnimator.ofFloat(button, "scaleX", 1, 1.3f, 1),
-//        ObjectAnimator.ofFloat(button, "scaleY", 1, 1.2f, 1));
-//    anim.setDuration(500);
-//    anim.start();
-//    if (button.isChecked()) {
-//      presenter.enterRecordingMode();
-//    } else {
-//      presenter.powerOff();
-//    }
-//  }
+  // public void onLikeModeButtonClicked(View view) {
+  // ToggleButton button = (ToggleButton) view;
+  // AnimatorSet anim = new AnimatorSet();
+  // anim.playTogether(ObjectAnimator.ofFloat(button, "scaleX", 1, 1.3f, 1),
+  // ObjectAnimator.ofFloat(button, "scaleY", 1, 1.2f, 1));
+  // anim.setDuration(500);
+  // anim.start();
+  // if (button.isChecked()) {
+  // presenter.enterRecordingMode();
+  // } else {
+  // presenter.powerOff();
+  // }
+  // }
 
   @Override
   public void onBackPressed() {
@@ -163,7 +167,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   public void disableControlPanel() {
     headerFragment.disableControlPanel();
   }
-  
+
   @Override
   public void enableControlPanel() {
     headerFragment.enableControlPanel();
