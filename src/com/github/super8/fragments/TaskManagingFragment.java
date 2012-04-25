@@ -4,6 +4,7 @@ import roboguice.fragment.RoboFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
 import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
@@ -13,8 +14,7 @@ import com.google.inject.Inject;
 public abstract class TaskManagingFragment<ReturnT> extends RoboFragment implements
     IgnitedAsyncTaskHandler<Context, Void, ReturnT> {
 
-  @Inject
-  private TaskManager taskManager;
+  @Inject private TaskManager taskManager;
 
   public TaskManagingFragment() {
     setRetainInstance(true);
@@ -28,16 +28,24 @@ public abstract class TaskManagingFragment<ReturnT> extends RoboFragment impleme
   @Override
   public void setContext(Context context) {
   }
-  
+
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    Log.d(getClass().getSimpleName(), "attaching fragment");
+  }
+
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+    Log.d(getClass().getSimpleName(), "activity created");
     taskManager.reconnectTasks(this);
   }
 
   @Override
   public void onDetach() {
     super.onDetach();
+    Log.d(getClass().getSimpleName(), "detaching fragment");
     taskManager.disconnectTasks();
   }
 

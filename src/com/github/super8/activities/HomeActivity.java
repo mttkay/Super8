@@ -45,6 +45,8 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
 
     setContentView(R.layout.home);
 
+    addDrawerContentFragments();
+
     presenter.bind(this);
 
     drawer.setOnDrawerCloseListener(presenter);
@@ -98,8 +100,18 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   }
 
   public void setDrawerContentFragment(Fragment fragment) {
+    Fragment inactiveFragment = fragment == personFinderFragment ? movieDetailsFragment
+        : personFinderFragment;
     FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-    tx.replace(R.id.drawer_content, fragment);
+    tx.detach(inactiveFragment);
+    tx.attach(fragment);
+    tx.commit();
+  }
+
+  private void addDrawerContentFragments() {
+    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+    tx.add(R.id.drawer_content, movieDetailsFragment);
+    tx.add(R.id.drawer_content, personFinderFragment);
     tx.commit();
   }
 
@@ -132,6 +144,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     headerFragment.showPlayView();
     infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
     infoboxFragment.setHelpText(R.string.help_text_suggestions_1, R.string.help_text_suggestions_2);
+    movieDetailsFragment.loadNextSuggestion();
     setDrawerContentFragment(movieDetailsFragment);
   }
 

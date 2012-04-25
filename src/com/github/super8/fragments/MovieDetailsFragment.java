@@ -59,12 +59,6 @@ public class MovieDetailsFragment extends TaskManagingFragment<Movie> implements
     ignoreButton.setOnClickListener(this);
   }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    loadNextSuggestion();
-  }
-
   public void loadNextSuggestion() {
     currentSuggestion = (currentSuggestion + 1) % suggestions.size();
     movie = suggestions.get(currentSuggestion);
