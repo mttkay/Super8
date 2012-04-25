@@ -43,7 +43,7 @@ public class MovieGalleryAdapter extends BaseAdapter {
   public long getItemId(int position) {
     return position;
   }
-  
+
   @Override
   public void notifyDataSetChanged() {
     this.movies = library.getWatchlist();
@@ -63,12 +63,18 @@ public class MovieGalleryAdapter extends BaseAdapter {
           .findViewById(R.id.movie_gallery_item_image);
       convertView.setTag(viewHolder);
     }
-    
+
     Movie movie = getItem(position);
     viewHolder.movieTitle.setText(movie.getTitle());
-    viewHolder.movieImage.setImageUrl(movie.getScaledImageUrl(appContext));
-    viewHolder.movieImage.loadImage();
-    
+
+    String imageUrl = movie.getScaledImageUrl(appContext);
+    if (imageUrl != null) {
+      viewHolder.movieImage.setImageUrl(imageUrl);
+      viewHolder.movieImage.loadImage();
+    } else {
+      // TODO: show dummy image
+    }
+
     return convertView;
   }
 

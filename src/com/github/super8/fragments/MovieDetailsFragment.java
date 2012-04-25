@@ -74,8 +74,13 @@ public class MovieDetailsFragment extends TaskManagingFragment<Movie> implements
   @Override
   public boolean onTaskSuccess(Context context, Movie movie) {
     movieTitle.setText(movie.getTitle());
-    moviePoster.setImageUrl(movie.getScaledImageUrl(context));
-    moviePoster.loadImage();
+    String imageUrl = movie.getScaledImageUrl(context);
+    if (imageUrl != null) {
+      moviePoster.setImageUrl(imageUrl);
+      moviePoster.loadImage();
+    } else {
+      // TODO: show dummy image
+    }
 
     switch (movie.getState()) {
     case Movie.STATE_MUST_SEE:

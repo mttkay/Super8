@@ -44,7 +44,7 @@ public abstract class TmdbParser<ModelT extends TmdbRecord> {
       throws JSONException;
 
   protected Date parseDate(String date) {
-    if (TextUtils.isEmpty(date)) {
+    if (TextUtils.isEmpty(date) || "null".equals(date)) {
       return null;
     }
     try {

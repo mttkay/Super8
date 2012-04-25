@@ -43,8 +43,13 @@ public class PersonDetailsFragment extends RoboFragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    personImageView.setImageUrl(person.getScaledImageUrl(getActivity()));
-    personImageView.loadImage();
+    String imageUrl = person.getScaledImageUrl(getActivity());
+    if (imageUrl != null) {
+      personImageView.setImageUrl(imageUrl);
+      personImageView.loadImage();
+    } else {
+      // TODO: show dummy image
+    }
 
     likeButton.setChecked(library.hasPerson(person));
     likeButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
