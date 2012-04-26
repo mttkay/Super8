@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
@@ -19,6 +20,7 @@ import com.github.super8.behavior.HomeScreenPresenter;
 import com.github.super8.fragments.HeaderFragment;
 import com.github.super8.fragments.InfoBoxFragment;
 import com.github.super8.fragments.MovieDetailsFragment;
+import com.github.super8.fragments.PersonDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
 import com.github.super8.fragments.WatchlistFragment;
 import com.github.super8.gestures.ShakeDetector;
@@ -73,11 +75,6 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   }
 
   @Override
-  public MovieDetailsFragment getMovieDetailsFragment() {
-    return movieDetailsFragment;
-  }
-
-  @Override
   public void showSlidingDrawer() {
     animate(drawer).alpha(1.0f).setDuration(250).start();
     drawer.setVisibility(View.VISIBLE);
@@ -102,7 +99,10 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
   public void setDrawerContentFragment(Fragment fragment) {
     Fragment inactiveFragment = fragment == personFinderFragment ? movieDetailsFragment
         : personFinderFragment;
-    FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction tx = fragmentManager.beginTransaction();
+    fragmentManager.popBackStack(PersonDetailsFragment.TAG,
+        FragmentManager.POP_BACK_STACK_INCLUSIVE);
     tx.detach(inactiveFragment);
     tx.attach(fragment);
     tx.commit();
@@ -144,8 +144,13 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     headerFragment.showPlayView();
     infoboxFragment.setContentView(InfoBoxFragment.CONTENT_HELP_TEXT);
     infoboxFragment.setHelpText(R.string.help_text_suggestions_1, R.string.help_text_suggestions_2);
-    movieDetailsFragment.loadNextSuggestion();
     setDrawerContentFragment(movieDetailsFragment);
+  }
+  
+  @Override
+  public void loadMovieSuggestion() {
+    hideSlidingDrawer();
+    movieDetailsFragment.loadNextSuggestion();
   }
 
   // public void onLikeModeButtonClicked(View view) {

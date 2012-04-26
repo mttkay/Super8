@@ -3,7 +3,6 @@ package com.github.super8.behavior;
 import android.widget.SlidingDrawer.OnDrawerCloseListener;
 
 import com.github.super8.db.LibraryManager;
-import com.github.super8.fragments.MovieDetailsFragment;
 import com.google.inject.Inject;
 
 public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawerCloseListener {
@@ -61,13 +60,8 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
 
   public void enterPlaybackMode() {
     homeScreen.showPlayView();
+    homeScreen.loadMovieSuggestion();
     state = State.PLAY;
-  }
-
-  public void getNextMovieSuggestion() {
-    homeScreen.hideSlidingDrawer();
-    MovieDetailsFragment fragment = homeScreen.getMovieDetailsFragment();
-    fragment.loadNextSuggestion();
   }
 
   public void onMovieSuggestionAvailable() {
@@ -78,7 +72,7 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   @Override
   public void onDrawerClosed() {
     if (state == State.PLAY) {
-      getNextMovieSuggestion();
+      homeScreen.loadMovieSuggestion();
     } else if (state == State.RECORD && library.hasSuggestions()) {
       enterPlaybackMode();
     }

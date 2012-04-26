@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 
 public class PersonDetailsFragment extends RoboFragment {
 
+  public static final String TAG = PersonDetailsFragment.class.getSimpleName();
   public static final String PERSON_EXTRA = "person";
 
   private Person person;

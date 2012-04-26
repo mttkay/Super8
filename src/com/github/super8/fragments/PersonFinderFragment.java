@@ -4,12 +4,14 @@ import java.util.List;
 
 import roboguice.fragment.RoboListFragment;
 import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -35,7 +37,9 @@ import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
 public class PersonFinderFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
-    TextWatcher, Handler.Callback {
+    TextWatcher, Handler.Callback, OnBackStackChangedListener {
+
+  public static final String TAG = PersonFinderFragment.class.getSimpleName();
 
   private static final int QUERY_DELAY = 500;
   private static final int QUERY_READY_MSG = 0;
@@ -61,6 +65,12 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     queryReadyHandler = new Handler(this);
+  }
+
+  @Override
+  public void onAttach(Activity activity) {
+    super.onAttach(activity);
+    getFragmentManager().addOnBackStackChangedListener(this);
   }
 
   @Override
@@ -92,6 +102,7 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   public void onDetach() {
     super.onDetach();
     taskManager.disconnectTasks();
+    getFragmentManager().removeOnBackStackChangedListener(this);
   }
 
   @Override
@@ -203,10 +214,15 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
       Bundle args = new Bundle();
       args.putParcelable(PersonDetailsFragment.PERSON_EXTRA, person);
       fragment.setArguments(args);
-      tx.replace(R.id.drawer_content, fragment);
-      tx.addToBackStack(null);
+      tx.add(R.id.drawer_content, fragment);
+      tx.addToBackStack(PersonDetailsFragment.TAG);
       tx.commit();
       return true;
     }
+  }
+
+  @Override
+  public void onBackStackChanged() {
+    adapter.notifyDataSetChanged();
   }
 }

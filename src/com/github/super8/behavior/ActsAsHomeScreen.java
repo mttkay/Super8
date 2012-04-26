@@ -1,6 +1,5 @@
 package com.github.super8.behavior;
 
-import com.github.super8.fragments.MovieDetailsFragment;
 
 public interface ActsAsHomeScreen extends Behavior, ControlPanel {
 
@@ -16,7 +15,7 @@ public interface ActsAsHomeScreen extends Behavior, ControlPanel {
     
   void showWatchlistView();
   
+  void loadMovieSuggestion();
+  
   HomeScreenPresenter getPresenter();
-
-  MovieDetailsFragment getMovieDetailsFragment();
 }

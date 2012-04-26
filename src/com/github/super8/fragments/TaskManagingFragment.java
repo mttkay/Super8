@@ -33,13 +33,13 @@ public abstract class TaskManagingFragment<ReturnT> extends RoboFragment impleme
   public void onAttach(Activity activity) {
     super.onAttach(activity);
     Log.d(getClass().getSimpleName(), "attaching fragment");
+    taskManager.reconnectTasks(this);
   }
 
   @Override
   public void onActivityCreated(Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     Log.d(getClass().getSimpleName(), "activity created");
-    taskManager.reconnectTasks(this);
   }
 
   @Override
