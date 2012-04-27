@@ -52,7 +52,11 @@ public class SuperToast {
   }
 
   public static void error(Context context, int messageId) {
-    Toast toast = build(context, android.R.drawable.ic_dialog_alert, messageId);
+    error(context, context.getString(messageId));
+  }
+
+  public static void error(Context context, String message) {
+    Toast toast = build(context, android.R.drawable.ic_dialog_alert, message);
     viewHolder.textView.setBackgroundDrawable(context.getResources().getDrawable(
         R.drawable.toast_error_background));
     toast.show();
