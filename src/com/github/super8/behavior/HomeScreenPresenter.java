@@ -71,10 +71,12 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
 
   @Override
   public void onDrawerClosed() {
-    if (state == State.PLAY) {
-      homeScreen.loadMovieSuggestion();
-    } else if (state == State.RECORD && library.hasSuggestions()) {
-      enterPlaybackMode();
+    if (library.hasSuggestions()) {
+      if (state == State.PLAY) {
+        homeScreen.loadMovieSuggestion();
+      } else if (state == State.RECORD) {
+        enterPlaybackMode();
+      }
     }
   }
 }

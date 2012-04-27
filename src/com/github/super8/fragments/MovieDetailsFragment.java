@@ -60,9 +60,11 @@ public class MovieDetailsFragment extends TaskManagingFragment<Movie> implements
   }
 
   public void loadNextSuggestion() {
-    currentSuggestion = (currentSuggestion + 1) % suggestions.size();
-    movie = suggestions.get(currentSuggestion);
-    addTask(TASK_GET_MOVIE, tmdb.backfillMovie(this, movie));
+    if (!suggestions.isEmpty()) {
+      currentSuggestion = (currentSuggestion + 1) % suggestions.size();
+      movie = suggestions.get(currentSuggestion);
+      addTask(TASK_GET_MOVIE, tmdb.backfillMovie(this, movie));
+    }
   }
 
   @Override
