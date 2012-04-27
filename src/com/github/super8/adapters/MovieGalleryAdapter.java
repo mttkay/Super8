@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +15,21 @@ import com.github.ignition.core.widgets.RemoteImageView;
 import com.github.super8.R;
 import com.github.super8.db.LibraryManager;
 import com.github.super8.model.Movie;
+import com.github.super8.support.Fonts;
 
 public class MovieGalleryAdapter extends BaseAdapter {
 
   private LibraryManager library;
   private List<Movie> movies;
   private LayoutInflater inflater;
+  private Typeface titleFont;
   private Context appContext;
 
   public MovieGalleryAdapter(Activity activity, LibraryManager library) {
     this.library = library;
     this.movies = library.getWatchlist();
     this.inflater = activity.getLayoutInflater();
+    this.titleFont = Fonts.robotoThin(activity);
     this.appContext = activity.getApplicationContext();
   }
 
@@ -59,6 +63,7 @@ public class MovieGalleryAdapter extends BaseAdapter {
       convertView = inflater.inflate(R.layout.movie_gallery_item, parent, false);
       viewHolder = new ViewHolder();
       viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.movie_gallery_item_title);
+      viewHolder.movieTitle.setTypeface(titleFont);
       viewHolder.movieImage = (RemoteImageView) convertView
           .findViewById(R.id.movie_gallery_item_image);
       convertView.setTag(viewHolder);

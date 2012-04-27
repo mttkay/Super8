@@ -3,7 +3,6 @@
   xmlns:ignition="http://github.com/ignition/schema"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/translucent_black"
   android:padding="20dp" >
 
   <Gallery

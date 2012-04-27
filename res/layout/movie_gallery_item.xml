@@ -4,22 +4,23 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent" >
 
+  <com.github.ignition.core.widgets.RemoteImageView
+    android:id="@+id/movie_gallery_item_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:scaleType="centerCrop"
+    ignition:autoLoad="false" />
+
   <TextView
     android:id="@+id/movie_gallery_item_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/translucent_black"
     android:ellipsize="end"
-    android:textColor="@android:color/white"
-    android:textSize="18sp"
-    android:textStyle="bold" />
-
-  <com.github.ignition.core.widgets.RemoteImageView
-    android:id="@+id/movie_gallery_item_image"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/movie_gallery_item_title"
-    android:layout_centerHorizontal="true"
-    android:scaleType="centerCrop"
-    ignition:autoLoad="false" />
+    android:gravity="center"
+    android:padding="10dp"
+    android:textAppearance="@style/TextAppearance.InfoBox.Large" />
 
 </RelativeLayout>
