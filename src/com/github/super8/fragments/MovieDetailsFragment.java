@@ -88,6 +88,9 @@ public class MovieDetailsFragment extends TaskManagingFragment<Movie> implements
     case Movie.STATE_IGNORE:
       stateButtons.check(R.id.movie_details_ignore_button);
       break;
+    default:
+      stateButtons.clearCheck();
+      break;
     }
 
     ActsAsHomeScreen homeScreen = (ActsAsHomeScreen) getActivity();
