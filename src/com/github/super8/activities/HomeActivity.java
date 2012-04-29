@@ -13,6 +13,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.github.super8.R;
 import com.github.super8.behavior.ActsAsHomeScreen;
@@ -43,6 +45,11 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    ActionBar actionBar = getSupportActionBar();
+    actionBar.setDisplayShowHomeEnabled(false);
+    actionBar.setDisplayShowTitleEnabled(false);
+    actionBar.hide();
+    
     shakeDetector = new ShakeDetector();
     shakeDetector.setOnShakeListener(this);
 
@@ -68,6 +75,12 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
     super.onPause();
     SensorManager sensors = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     sensors.unregisterListener(shakeDetector);
+  }
+  
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // TODO Auto-generated method stub
+    return super.onCreateOptionsMenu(menu);
   }
 
   @Override

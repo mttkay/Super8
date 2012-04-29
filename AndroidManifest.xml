@@ -20,7 +20,8 @@
     android:theme="@style/Super8" >
     <activity
       android:name=".activities.HomeActivity"
-      android:screenOrientation="portrait" >
+      android:screenOrientation="portrait"
+      android:uiOptions="splitActionBarWhenNarrow" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +29,8 @@
       </intent-filter>
     </activity>
     <activity android:name=".activities.SearchResultActivity" />
-    
-    <service android:name=".services.ImportFilmographyService"/>
+
+    <service android:name=".services.ImportFilmographyService" />
   </application>
 
 </manifest>
