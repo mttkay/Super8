@@ -22,13 +22,13 @@
     <dependency>
       <groupId>com.google.android</groupId>
       <artifactId>android</artifactId>
-      <version>2.2.1</version>
+      <version>4.0.1.2</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.roboguice</groupId>
       <artifactId>roboguice</artifactId>
-      <version>2.0b4</version>
+      <version>2.0</version>
     </dependency>
     <dependency>
       <groupId>com.github.ignition</groupId>
@@ -36,6 +36,24 @@
       <version>0.2-SNAPSHOT</version>
       <type>apklib</type>
     </dependency>
+    <dependency>
+      <groupId>com.wazabe.holoeverywhere</groupId>
+      <artifactId>library</artifactId>
+      <version>1.0.0</version>
+      <type>apklib</type>
+    </dependency>
+    <dependency>
+      <groupId>com.actionbarsherlock</groupId>
+      <artifactId>library</artifactId>
+      <version>4.0.2</version>
+      <type>apklib</type>
+    </dependency>
+    <dependency>
+      <groupId>com.github.rtyley</groupId>
+      <artifactId>roboguice-sherlock</artifactId>
+      <version>1.4</version>
+    </dependency>
+
   </dependencies>
 
   <build>

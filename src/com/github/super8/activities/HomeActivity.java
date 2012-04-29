@@ -1,7 +1,6 @@
 package com.github.super8.activities;
 
 import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
-import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -14,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.SlidingDrawer;
 
+import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.github.super8.R;
 import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
@@ -27,7 +27,8 @@ import com.github.super8.gestures.ShakeDetector;
 import com.github.super8.gestures.ShakeDetector.OnShakeListener;
 import com.google.inject.Inject;
 
-public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScreen, OnShakeListener {
+public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAsHomeScreen,
+    OnShakeListener {
 
   @Inject private HomeScreenPresenter presenter;
   @Inject private PersonFinderFragment personFinderFragment;
@@ -146,7 +147,7 @@ public class HomeActivity extends RoboFragmentActivity implements ActsAsHomeScre
     infoboxFragment.setHelpText(R.string.help_text_suggestions_1, R.string.help_text_suggestions_2);
     setDrawerContentFragment(movieDetailsFragment);
   }
-  
+
   @Override
   public void loadMovieSuggestion() {
     hideSlidingDrawer();

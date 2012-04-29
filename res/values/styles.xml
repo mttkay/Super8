@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="Super8" parent="@android:style/Theme.Black.NoTitleBar">
+  <style name="Super8" parent="Theme.HoloEverywhereDark.Sherlock">
     <item name="android:editTextStyle">@style/EditText</item>
     <item name="android:textAppearance">@style/TextAppearance.Default</item>
     <item name="android:textAppearanceSmall">@style/TextAppearance.Small</item>
