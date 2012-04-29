@@ -40,7 +40,6 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   }
 
   public void powerOn() {
-    homeScreen.showSlidingDrawer();
     homeScreen.enableControlPanel();
     if (library.hasSuggestions()) {
       enterPlaybackMode();
@@ -54,11 +53,13 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   }
 
   public void enterRecordingMode() {
+    homeScreen.showSlidingDrawer();
     homeScreen.showRecordView();
     state = State.RECORD;
   }
 
   public void enterPlaybackMode() {
+    homeScreen.showSlidingDrawer();
     homeScreen.showPlayView();
     homeScreen.loadMovieSuggestion();
     state = State.PLAY;
