@@ -14,5 +14,7 @@
   <string name="like_artist_or_director_hint">e.g. \"Chris Nolan\" or \"Brad Pitt\"</string>
   <string name="person_loading">Loading…</string>
   <string name="empty_list">No Results</string>
+  <string name="menu_watchlist_details">Details</string>
+  <string name="menu_watchlist_remove">Remove</string>
 
 </resources>

@@ -54,6 +54,11 @@ public class LibraryManager {
     movieDao.update(movie);
   }
   
+  public void removeFromWatchlist(Movie movie) {
+    movie.setState(Movie.STATE_DEFAULT);
+    movieDao.update(movie);
+  }
+  
   public void markAsSeen(Movie movie) {
     movie.setState(Movie.STATE_SEEN_IT);
     movieDao.update(movie);
