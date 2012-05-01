@@ -50,13 +50,23 @@ public class WatchlistFragment extends RoboFragment implements OnItemClickListen
   @Override
   public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
     SherlockFragmentActivity activity = (SherlockFragmentActivity) getActivity();
-    actionMode = activity.startActionMode(new WatchlistActionMode(activity.getSupportActionBar()));
+    if (actionMode != null) {
+      stopActionMode();
+    } else {
+      actionMode = activity
+          .startActionMode(new WatchlistActionMode(activity.getSupportActionBar()));
+    }
+  }
+
+  private void stopActionMode() {
+    actionMode.finish();
+    actionMode = null;
   }
 
   @Override
   public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
     if (actionMode != null) {
-      actionMode.finish();
+      stopActionMode();
     }
   }
 
