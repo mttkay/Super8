@@ -45,12 +45,16 @@ public class SuperToast {
   }
 
   public static void info(Context context, int messageId) {
-    Toast toast = build(context, android.R.drawable.ic_dialog_info, messageId);
+    info(context, context.getString(messageId));
+  }
+
+  public static void info(Context context, String message) {
+    Toast toast = build(context, android.R.drawable.ic_dialog_info, message);
     viewHolder.textView.setBackgroundDrawable(context.getResources().getDrawable(
         R.drawable.toast_info_background));
     toast.show();
   }
-
+  
   public static void error(Context context, int messageId) {
     error(context, context.getString(messageId));
   }

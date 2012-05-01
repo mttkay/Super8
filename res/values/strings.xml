@@ -16,5 +16,7 @@
   <string name="empty_list">No Results</string>
   <string name="menu_watchlist_details">Details</string>
   <string name="menu_watchlist_remove">Remove</string>
-
+  <string name="msg_importing_filmography">Importing filmography…</string>
+  <string name="msg_import_done">Done! %s movies were added to your library</string>
+  
 </resources>

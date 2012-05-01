@@ -94,11 +94,13 @@ public class WatchlistFragment extends RoboFragment implements OnItemClickListen
 
   @Override
   public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+    int defaultFlags = MenuItem.SHOW_AS_ACTION_WITH_TEXT;
     menu.add(Menu.NONE, R.id.menu_watchlist_details, Menu.NONE, R.string.menu_watchlist_details)
         .setIcon(android.R.drawable.ic_menu_info_details)
-        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | defaultFlags);
     menu.add(Menu.NONE, R.id.menu_watchlist_remove, Menu.NONE, R.string.menu_watchlist_remove)
-        .setIcon(android.R.drawable.ic_menu_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        .setIcon(android.R.drawable.ic_menu_delete)
+        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | defaultFlags);
     return true;
   }
 

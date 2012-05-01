@@ -32,6 +32,8 @@ public class ImportFilmographyService extends RoboIntentService {
     Messenger messenger = intent.getParcelableExtra(MESSENGER_EXTRA);
     try {
       Credits credits = tmdb.getCredits(personId);
+      sendImportStartedMessage(messenger, credits);
+
       for (Appearance app : credits.getAllAppearances()) {
         System.out.println(app.getMovieTitle());
         // fetch the full movie record for this appearance
@@ -39,15 +41,35 @@ public class ImportFilmographyService extends RoboIntentService {
 
         library.saveMovie(movie);
 
-        Message message = Message.obtain();
-        message.what = PersonDetailsFragment.MSG_MOVIE_IMPORTED;
-        message.getData().putParcelable("movie", movie);
-        messenger.send(message);
+        sendMovieImportedMessage(messenger, movie);
       }
+
+      sendImportSucceededMessage(messenger);
 
     } catch (Exception e) {
       handleError(messenger, e);
     }
+  }
+
+  private void sendImportSucceededMessage(Messenger messenger) throws RemoteException {
+    Message message = Message.obtain();
+    message.what = PersonDetailsFragment.MSG_IMPORT_SUCCEEDED;
+    messenger.send(message);
+  }
+
+  private void sendMovieImportedMessage(Messenger messenger, Movie movie) throws RemoteException {
+    Message message = Message.obtain();
+    message.what = PersonDetailsFragment.MSG_MOVIE_IMPORTED;
+    message.getData().putParcelable("movie", movie);
+    messenger.send(message);
+  }
+
+  private void sendImportStartedMessage(Messenger messenger, Credits credits)
+      throws RemoteException {
+    Message message = Message.obtain();
+    message.what = PersonDetailsFragment.MSG_IMPORT_STARTED;
+    message.arg1 = credits.size();
+    messenger.send(message);
   }
 
   private void handleError(Messenger messenger, Exception e) {

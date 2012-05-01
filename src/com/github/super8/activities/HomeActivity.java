@@ -15,6 +15,7 @@ import android.widget.SlidingDrawer;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.Window;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.github.super8.R;
 import com.github.super8.behavior.ActsAsHomeScreen;
@@ -27,6 +28,7 @@ import com.github.super8.fragments.PersonFinderFragment;
 import com.github.super8.fragments.WatchlistFragment;
 import com.github.super8.gestures.ShakeDetector;
 import com.github.super8.gestures.ShakeDetector.OnShakeListener;
+import com.github.super8.services.ImportFilmographyHandler;
 import com.google.inject.Inject;
 
 public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAsHomeScreen,
@@ -40,14 +42,17 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;
 
   private ShakeDetector shakeDetector;
+  private ImportFilmographyHandler importHandler;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    requestWindowFeature(Window.FEATURE_PROGRESS);
+    
     ActionBar actionBar = getSupportActionBar();
     actionBar.setDisplayShowHomeEnabled(false);
-    actionBar.setDisplayShowTitleEnabled(false);
+    actionBar.setDisplayShowTitleEnabled(true);
     actionBar.hide();
     
     shakeDetector = new ShakeDetector();
@@ -78,6 +83,14 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
   }
   
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (importHandler != null) {
+      importHandler.detach();
+    }
+  }
+  
+  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // TODO Auto-generated method stub
     return super.onCreateOptionsMenu(menu);
@@ -86,6 +99,14 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
   @Override
   public HomeScreenPresenter getPresenter() {
     return presenter;
+  }
+  
+  @Override
+  public ImportFilmographyHandler getImportFilmographyHandler() {
+    if (importHandler == null) {
+      importHandler = new ImportFilmographyHandler(this);
+    }
+    return importHandler;
   }
 
   @Override

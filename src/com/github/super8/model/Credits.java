@@ -7,6 +7,7 @@ public class Credits extends TmdbRecord {
 
   private List<CastAppearance> castAppearances;
   private List<CrewAppearance> crewAppearances;
+  private int size = -1;
 
   public List<CastAppearance> getCastAppearances() {
     return castAppearances;
@@ -25,14 +26,7 @@ public class Credits extends TmdbRecord {
   }
 
   public List<Appearance> getAllAppearances() {
-    int containerSize = 0;
-    if (castAppearances != null) {
-      containerSize += castAppearances.size();
-    }
-    if (crewAppearances != null) {
-      containerSize += crewAppearances.size();
-    }
-    ArrayList<Appearance> all = new ArrayList<Appearance>(containerSize);
+    ArrayList<Appearance> all = new ArrayList<Appearance>(size());
     if (castAppearances != null) {
       all.addAll(castAppearances);
     }
@@ -41,5 +35,20 @@ public class Credits extends TmdbRecord {
     }
 
     return all;
+  }
+
+  public int size() {
+    if (size > -1) {
+      return size;
+    } else {
+      size = 0;
+    }
+    if (castAppearances != null) {
+      size += castAppearances.size();
+    }
+    if (crewAppearances != null) {
+      size += crewAppearances.size();
+    }
+    return size;
   }
 }
