@@ -16,15 +16,13 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:background="@color/light_brown_translucent"
-    android:cacheColorHint="@color/light_brown_translucent" />
+    android:cacheColorHint="@android:color/transparent" />
 
   <TextView
     android:id="@android:id/empty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/light_brown_translucent"
     android:textAppearance="@style/TextAppearance.Large" />
 
 </LinearLayout>

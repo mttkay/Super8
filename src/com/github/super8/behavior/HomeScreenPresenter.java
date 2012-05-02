@@ -4,7 +4,9 @@ import android.widget.SlidingDrawer.OnDrawerCloseListener;
 
 import com.github.super8.db.LibraryManager;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawerCloseListener {
 
   public enum State {
@@ -63,6 +65,14 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
     homeScreen.showPlayView();
     homeScreen.loadMovieSuggestion();
     state = State.PLAY;
+  }
+
+  public void getNextMovieSuggestion() {
+    if (state != State.PLAY) {
+      enterPlaybackMode();
+    } else {
+      homeScreen.closeSlidingDrawer(); // this will trigger the next suggestion
+    }
   }
 
   public void onMovieSuggestionAvailable() {

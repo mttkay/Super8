@@ -3,6 +3,7 @@ package com.github.super8.model;
 import android.content.Context;
 import android.os.Parcel;
 
+import com.github.ignition.support.IgnitedScreens;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 
 public abstract class ImageRecord extends TmdbRecord {
@@ -20,17 +21,17 @@ public abstract class ImageRecord extends TmdbRecord {
   public String getScaledImageUrl(Context context) {
     if (scaledImageUrl == null && imagePath != null) {
       String sizeSpec = null;
-      // if (IgnitedScreens.getScreenDensity(context) > IgnitedScreens.SCREEN_DENSITY_MEDIUM) {
-      sizeSpec = "w185";
-      // } else {
-      // sizeSpec = "w45";
-      // }
+      if (IgnitedScreens.getScreenDensity(context) > IgnitedScreens.SCREEN_DENSITY_MEDIUM) {
+        sizeSpec = "w342";
+      } else {
+        sizeSpec = "w185";
+      }
       scaledImageUrl = TmdbApi.IMAGE_BASE_URL + sizeSpec + imagePath;
     }
 
     return scaledImageUrl;
   }
-  
+
   public String getBackdropPath() {
     return backdropPath;
   }
@@ -38,7 +39,7 @@ public abstract class ImageRecord extends TmdbRecord {
   public void setBackdropPath(String backdropPath) {
     this.backdropPath = backdropPath;
   }
-  
+
   public String getScaledBackdropUrl(Context context) {
     if (scaledBackdropUrl == null && backdropPath != null) {
       String sizeSpec = null;
@@ -51,7 +52,7 @@ public abstract class ImageRecord extends TmdbRecord {
     }
 
     return scaledBackdropUrl;
-  }  
+  }
 
   @Override
   protected void readFromParcel(Parcel source) {

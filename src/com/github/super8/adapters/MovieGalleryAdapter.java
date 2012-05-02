@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +21,12 @@ public class MovieGalleryAdapter extends BaseAdapter {
   private LibraryManager library;
   private List<Movie> movies;
   private LayoutInflater inflater;
-  private Typeface titleFont;
   private Context appContext;
 
   public MovieGalleryAdapter(Activity activity, LibraryManager library) {
     this.library = library;
     this.movies = library.getWatchlist();
     this.inflater = activity.getLayoutInflater();
-    this.titleFont = Fonts.robotoThin(activity);
     this.appContext = activity.getApplicationContext();
   }
 
@@ -60,16 +57,17 @@ public class MovieGalleryAdapter extends BaseAdapter {
     if (convertView != null) {
       viewHolder = (ViewHolder) convertView.getTag();
     } else {
-      convertView = inflater.inflate(R.layout.movie_gallery_item, parent, false);
+      convertView = inflater.inflate(R.layout.movie_compact, parent, false);
       viewHolder = new ViewHolder();
-      viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.movie_gallery_item_title);
-      viewHolder.movieTitle.setTypeface(titleFont);
-      viewHolder.movieImage = (RemoteImageView) convertView
-          .findViewById(R.id.movie_gallery_item_image);
+      viewHolder.movieTitle = (TextView) convertView.findViewById(R.id.movie_compact_title);
+      viewHolder.movieTitle.setTypeface(Fonts.robotoThin(appContext));
+      viewHolder.movieTitle.setVisibility(View.VISIBLE);
+      viewHolder.movieImage = (RemoteImageView) convertView.findViewById(R.id.movie_compact_poster);
       convertView.setTag(viewHolder);
     }
 
     Movie movie = getItem(position);
+
     viewHolder.movieTitle.setText(movie.getTitle());
 
     String imageUrl = movie.getScaledImageUrl(appContext);

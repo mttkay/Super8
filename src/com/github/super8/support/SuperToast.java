@@ -55,6 +55,10 @@ public class SuperToast {
     toast.show();
   }
   
+  public static void TODO(Context context) {
+    info(context, "Implement me, Matthias!");
+  }
+  
   public static void error(Context context, int messageId) {
     error(context, context.getString(messageId));
   }

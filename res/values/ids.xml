@@ -3,5 +3,8 @@
 
   <item name="menu_watchlist_details" type="id"/>
   <item name="menu_watchlist_remove" type="id"/>
-
+  <item name="menu_suggestion_watchlist_add" type="id"/>
+  <item name="menu_suggestion_seen" type="id"/>
+  <item name="menu_suggestion_hate" type="id"/>
+  
 </resources>

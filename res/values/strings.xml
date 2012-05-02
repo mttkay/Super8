@@ -14,8 +14,11 @@
   <string name="like_artist_or_director_hint">e.g. \"Chris Nolan\" or \"Brad Pitt\"</string>
   <string name="person_loading">Loading…</string>
   <string name="empty_list">No Results</string>
-  <string name="menu_watchlist_details">Details</string>
-  <string name="menu_watchlist_remove">Remove</string>
+  <string name="menu_watchlist_details">Show movie details</string>
+  <string name="menu_watchlist_remove">Remove from watchlist</string>
+  <string name="menu_suggestion_watchlist_add">Add to watchlist</string>
+  <string name="menu_suggestion_seen">Seen this movie!</string>
+  <string name="menu_suggestion_hate">Hate this movie!</string>
   <string name="msg_importing_filmography">Importing filmography…</string>
   <string name="msg_import_done">Done! %s movies were added to your library</string>
   
