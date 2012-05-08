@@ -37,7 +37,7 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
       imageView.setImageUrl(imageUrl);
       imageView.loadImage();
     } else {
-      imageView.getImageView().setImageDrawable(null);
+      imageView.setImageDrawable(null);
     }
 
     return itemView;
