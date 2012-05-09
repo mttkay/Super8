@@ -22,7 +22,7 @@ import com.github.super8.behavior.ActsAsHomeScreen;
 import com.github.super8.behavior.HomeScreenPresenter;
 import com.github.super8.fragments.HeaderFragment;
 import com.github.super8.fragments.InfoBoxFragment;
-import com.github.super8.fragments.MovieDetailsFragment;
+import com.github.super8.fragments.MovieSuggestionFragment;
 import com.github.super8.fragments.PersonDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
 import com.github.super8.fragments.WatchlistFragment;
@@ -36,7 +36,7 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
 
   @Inject private HomeScreenPresenter presenter;
   @Inject private PersonFinderFragment personFinderFragment;
-  @Inject private MovieDetailsFragment movieDetailsFragment;
+  @Inject private MovieSuggestionFragment movieDetailsFragment;
   @InjectView(R.id.drawer) private SlidingDrawer drawer;
   @InjectFragment(R.id.header_fragment) private HeaderFragment headerFragment;
   @InjectFragment(R.id.infobox_fragment) private InfoBoxFragment infoboxFragment;

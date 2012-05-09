@@ -27,7 +27,7 @@ import com.github.super8.support.Fonts;
 import com.github.super8.support.SuperToast;
 import com.google.inject.Inject;
 
-public class MovieDetailsFragment extends TaskManagingFragment<Movie> implements
+public class MovieSuggestionFragment extends TaskManagingFragment<Movie> implements
     TmdbApiHandler<Movie>, OnClickListener, ActionMode.Callback {
 
   private static final int TASK_GET_MOVIE = 0;
