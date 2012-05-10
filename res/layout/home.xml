@@ -28,25 +28,10 @@
       android:layout_weight="1" />
   </LinearLayout>
 
-  <SlidingDrawer
-    android:id="@+id/drawer"
+  <include
     android:layout_width="match_parent"
     android:layout_height="400dip"
     android:layout_alignParentBottom="true"
-    android:content="@+id/drawer_content"
-    android:handle="@+id/drawer_handle" >
-
-    <ImageView
-      android:id="@id/drawer_handle"
-      android:layout_width="60dip"
-      android:layout_height="60dip"
-      android:src="@drawable/handle" />
-
-    <FrameLayout
-      android:id="@id/drawer_content"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/translucent_black" />
-  </SlidingDrawer>
+    layout="@layout/drawer" />
 
 </RelativeLayout>

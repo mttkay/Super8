@@ -20,7 +20,6 @@
     android:theme="@style/Super8" >
     <activity
       android:name=".activities.HomeActivity"
-      android:screenOrientation="portrait"
       android:uiOptions="splitActionBarWhenNarrow" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

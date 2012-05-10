@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ignition="http://github.com/ignition/schema"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/home_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/main_background"
+  android:orientation="vertical"
+  tools:ignore="ContentDescription" >
+
+  <fragment
+    android:id="@+id/header_fragment"
+    android:name="com.github.super8.fragments.HeaderFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <fragment
+      android:id="@+id/infobox_fragment"
+      android:name="com.github.super8.fragments.InfoBoxFragment"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="1" />
+
+    <include
+      android:layout_width="320dp"
+      android:layout_height="match_parent"
+      layout="@layout/drawer" />
+  </LinearLayout>
+
+</LinearLayout>
