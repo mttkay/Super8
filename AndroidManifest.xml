@@ -27,7 +27,9 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.SearchResultActivity" />
+    <activity
+      android:name=".activities.MovieDetailsActivity"
+      android:theme="@style/NoActionBarOverlay" />
 
     <service android:name=".services.ImportFilmographyService" />
   </application>

@@ -17,6 +17,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.ignition.core.widgets.RemoteImageView;
 import com.github.super8.R;
+import com.github.super8.activities.MovieDetailsActivity;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.apis.tmdb.v3.TmdbApiHandler;
 import com.github.super8.behavior.ActsAsHomeScreen;
@@ -111,7 +112,7 @@ public class MovieSuggestionFragment extends TaskManagingFragment<Movie> impleme
 
     switch (item.getItemId()) {
     case R.id.menu_watchlist_details:
-      SuperToast.TODO(getActivity());
+      MovieDetailsActivity.launch(getActivity(), movie);
       break;
     case R.id.menu_suggestion_watchlist_add:
       library.addToWatchlist(movie);

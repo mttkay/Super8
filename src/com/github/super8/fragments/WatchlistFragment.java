@@ -16,6 +16,7 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.super8.R;
+import com.github.super8.activities.MovieDetailsActivity;
 import com.github.super8.adapters.MovieGalleryAdapter;
 import com.github.super8.db.LibraryManager;
 import com.github.super8.model.Movie;
@@ -82,6 +83,7 @@ public class WatchlistFragment extends RoboFragment implements OnItemClickListen
   public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
     switch (item.getItemId()) {
     case R.id.menu_watchlist_details:
+      MovieDetailsActivity.launch(getActivity(), currentMovie);
       break;
     case R.id.menu_watchlist_remove:
       library.removeFromWatchlist(currentMovie);

@@ -2,13 +2,15 @@
 <resources>
 
   <style name="Super8" parent="Theme.HoloEverywhereDark.Sherlock">
-<!--     <item name="android:editTextStyle">@style/EditText</item>
- -->    <item name="android:textAppearance">@style/TextAppearance.Default</item>
+
+    <!-- <item name="android:editTextStyle">@style/EditText</item> -->
+    <item name="android:textAppearance">@style/TextAppearance.Default</item>
     <item name="android:textAppearanceSmall">@style/TextAppearance.Small</item>
     <item name="android:textAppearanceMedium">@style/TextAppearance.Medium</item>
     <!-- <item name="android:windowBackground">@drawable/main_bg_1</item> -->
     <!-- <item name="android:button">@style/CircleButton</item> -->
-    
+
+
     <!-- ActionBar stuff -->
     <item name="windowActionBarOverlay">true</item>
     <item name="android:windowActionBarOverlay">true</item>
@@ -16,9 +18,12 @@
     <item name="android:actionBarStyle">@style/ActionBar</item>
   </style>
 
-  <style name="ActionBar" parent="Widget.Sherlock.ActionBar">
+  <style name="NoActionBarOverlay" parent="Super8">
+    <item name="windowActionBarOverlay">false</item>
   </style>
-  
+
+  <style name="ActionBar" parent="Widget.Sherlock.ActionBar"></style>
+
   <style name="CircleButton" parent="android:Widget.Button">
     <item name="android:layout_width">50dp</item>
     <item name="android:layout_height">50dp</item>
@@ -33,8 +38,9 @@
   </style>
 
   <style name="EditText" parent="@android:Widget.EditText">
-<!--     <item name="android:background">@drawable/edit_text_bg</item>
- -->    <item name="android:textColor">#FFF</item>
+
+    <!-- <item name="android:background">@drawable/edit_text_bg</item> -->
+    <item name="android:textColor">#FFF</item>
     <item name="android:padding">10dp</item>
   </style>
 
@@ -53,7 +59,7 @@
   <style name="TextAppearance.Large" parent="TextAppearance.Default">
     <item name="android:textSize">32sp</item>
   </style>
-  
+
   <style name="TextAppearance.InfoBox.Large" parent="android:TextAppearance">
     <item name="android:textColor">#FFF</item>
     <item name="android:textSize">24sp</item>
@@ -65,6 +71,7 @@
   </style>
 
   <style name="InfoBox">
+
     <!-- <item name="android:background">@drawable/info_box_background</item> -->
     <item name="android:padding">10dp</item>
     <item name="android:gravity">center</item>
@@ -75,11 +82,11 @@
     <item name="android:gravity">center</item>
     <item name="android:layout_centerHorizontal">true</item>
   </style>
-  
+
   <style name="InfoBox.TextView.Sub" parent="InfoBox.TextView">
     <item name="android:textAppearance">@style/TextAppearance.InfoBox.Small</item>
     <item name="android:layout_marginTop">10dp</item>
     <item name="android:layout_below">@android:id/text1</item>
-  </style>  
+  </style>
 
 </resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:ignition="http://github.com/ignition/schema"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/translucent_black"
+  android:padding="20dp" >
+
+  <com.github.ignition.core.widgets.RemoteImageView
+    android:id="@+id/movie_details_poster"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:scaleType="center"
+    android:src="@drawable/main_background"
+    ignition:autoLoad="false" />
+
+</RelativeLayout>
