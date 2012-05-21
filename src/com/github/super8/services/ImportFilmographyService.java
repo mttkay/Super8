@@ -35,7 +35,6 @@ public class ImportFilmographyService extends RoboIntentService {
       sendImportStartedMessage(messenger, credits);
 
       for (Appearance app : credits.getAllAppearances()) {
-        System.out.println(app.getMovieTitle());
         // fetch the full movie record for this appearance
         Movie movie = tmdb.getMovie(app.getTmdbId());
 
