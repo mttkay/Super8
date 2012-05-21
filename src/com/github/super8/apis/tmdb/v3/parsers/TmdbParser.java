@@ -54,4 +54,11 @@ public abstract class TmdbParser<ModelT extends TmdbRecord> {
       return null;
     }
   }
+
+  protected String parseString(String source) {
+    if (TextUtils.isEmpty(source) || "null".equals(source)) {
+      return null;
+    }
+    return source;
+  }
 }
