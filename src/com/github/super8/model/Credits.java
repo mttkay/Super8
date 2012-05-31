@@ -1,6 +1,7 @@
 package com.github.super8.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Credits extends TmdbRecord {
@@ -35,6 +36,26 @@ public class Credits extends TmdbRecord {
     }
 
     return all;
+  }
+
+  public List<CrewAppearance> getCrewAppearances(String department) {
+    return getCrewAppearances(department, null);
+  }
+
+  public List<CrewAppearance> getCrewAppearances(String department, String job) {
+    if (crewAppearances == null) {
+      return Collections.emptyList();
+    }
+
+    ArrayList<CrewAppearance> result = new ArrayList<CrewAppearance>(crewAppearances.size());
+    for (CrewAppearance a : crewAppearances) {
+      if (department.equalsIgnoreCase(a.getDepartment())
+          && (job == null || job.equalsIgnoreCase(a.getJob()))) {
+        result.add(a);
+      }
+    }
+
+    return result;
   }
 
   public int size() {

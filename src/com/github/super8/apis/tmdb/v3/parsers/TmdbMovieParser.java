@@ -15,18 +15,10 @@ public class TmdbMovieParser extends TmdbParser<Movie> {
     movie.setTitle(modelObject.getString("title"));
     movie.setReleaseDate(parseDate(modelObject.getString("release_date")));
 
-    String backdropPath = modelObject.getString("backdrop_path");
-    if (!"null".equals(backdropPath)) {
-      movie.setBackdropPath(backdropPath);
-    }
-    String posterPath = modelObject.getString("poster_path");
-    if (!"null".equals(posterPath)) {
-      movie.setImagePath(posterPath);
-    }
+    movie.setBackdropPath(parseString(modelObject.getString("backdrop_path")));
+    movie.setImagePath(parseString(modelObject.getString("poster_path")));
 
-    // these fields are only available for a full person request
-
-    // TODO: parse genres, plot/summary, tag line, votes
+    movie.setSynopsis(parseString(modelObject.optString("overview")));
 
     return movie;
   }

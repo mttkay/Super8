@@ -59,8 +59,10 @@ public class TmdbCreditsParser extends TmdbParser<Credits> {
   private void parseAppearanceFields(JSONObject jsonObject, Appearance appearance)
       throws JSONException {
     appearance.setTmdbId(jsonObject.getInt("id"));
-    appearance.setMovieTitle(jsonObject.getString("title"));
-    appearance.setMoviePosterPath(jsonObject.getString("poster_path"));
-    appearance.setMovieReleaseDate(parseDate(jsonObject.getString("release_date")));
+    appearance.setName(jsonObject.optString("name"));
+    appearance.setMovieTitle(jsonObject.optString("title"));
+    appearance.setMoviePosterPath(parseString(jsonObject.optString("poster_path")));
+    appearance.setMovieReleaseDate(parseDate(jsonObject.optString("release_date")));
+    appearance.setPersonProfilePath(parseString(jsonObject.optString("profile_path")));
   }
 }

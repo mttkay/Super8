@@ -4,9 +4,17 @@ import java.util.Date;
 
 public class Appearance extends TmdbRecord {
 
-  private String moviePosterPath, movieTitle;
+  private String name, moviePosterPath, movieTitle, personProfilePath;
   private Date movieReleaseDate;
 
+  public String getName() {
+    return name;
+  }
+  
+  public void setName(String name) {
+    this.name = name;
+  }
+  
   public String getPosterPath() {
     return moviePosterPath;
   }
@@ -31,4 +39,16 @@ public class Appearance extends TmdbRecord {
     this.movieTitle = movieTitle;
   }
   
+  public String getPersonProfilePath() {
+    return personProfilePath;
+  }
+  
+  public void setPersonProfilePath(String personProfilePath) {
+    this.personProfilePath = personProfilePath;
+  }
+  
+  @Override
+  public String toString() {
+    return name;
+  }
 }

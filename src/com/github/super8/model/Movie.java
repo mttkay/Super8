@@ -15,7 +15,7 @@ public class Movie extends ImageRecord {
   public static final int STATE_IGNORE = 3;
 
   // TMDB attributes
-  private String imdbId, title;
+  private String imdbId, title, synopsis;
   private Date releaseDate;
 
   // other attributes
@@ -35,6 +35,14 @@ public class Movie extends ImageRecord {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getSynopsis() {
+    return synopsis;
+  }
+
+  public void setSynopsis(String synopsis) {
+    this.synopsis = synopsis;
   }
 
   public Date getReleaseDate() {
@@ -58,6 +66,7 @@ public class Movie extends ImageRecord {
     super.readFromParcel(source);
     imdbId = source.readString();
     title = source.readString();
+    synopsis = source.readString();
     state = source.readInt();
     releaseDate = IgnitedParcels.readDate(source);
   }
@@ -67,6 +76,7 @@ public class Movie extends ImageRecord {
     super.writeToParcel(dest, flags);
     dest.writeString(imdbId);
     dest.writeString(title);
+    dest.writeString(synopsis);
     dest.writeInt(state);
     IgnitedParcels.writeDate(dest, releaseDate);
   }

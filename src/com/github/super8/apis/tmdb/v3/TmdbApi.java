@@ -79,6 +79,13 @@ public class TmdbApi {
     return task.run(ENDPOINT + "/person/" + personId + "/credits?api_key=" + API_KEY);
   }
 
+  public TmdbApiTask<Credits> getCasts(TmdbApiHandler<Credits> handler, int movieId) {
+    TmdbFetchOneTask<Credits> task = new TmdbFetchOneTask<Credits>(http, new TmdbCreditsParser());
+    task.connect(handler);
+    task.execute(ENDPOINT + "/movie/" + movieId + "/casts?api_key=" + API_KEY);
+    return task;
+  }
+  
   private String searchUrl(String resource, String query) {
     try {
       return ENDPOINT + "/search/" + resource + "?api_key=" + API_KEY + "&query="
