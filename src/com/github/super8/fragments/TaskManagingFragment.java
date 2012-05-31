@@ -1,6 +1,5 @@
 package com.github.super8.fragments;
 
-import roboguice.fragment.RoboFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,10 +7,11 @@ import android.util.Log;
 
 import com.github.ignition.core.tasks.IgnitedAsyncTask;
 import com.github.ignition.core.tasks.IgnitedAsyncTaskHandler;
+import com.github.rtyley.android.sherlock.roboguice.fragment.RoboSherlockFragment;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
-public abstract class TaskManagingFragment<ReturnT> extends RoboFragment implements
+public abstract class TaskManagingFragment<ReturnT> extends RoboSherlockFragment implements
     IgnitedAsyncTaskHandler<Context, Void, ReturnT> {
 
   @Inject private TaskManager taskManager;
