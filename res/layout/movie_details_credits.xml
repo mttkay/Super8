@@ -12,9 +12,7 @@
     android:layout_height="fill_parent"
     android:fadingEdge="vertical"
     android:gravity="center_horizontal"
-    android:text="test test test test test test test test test test test test test test test test test test test test "
     android:padding="15dp"
-    android:textSize="24sp"
-    android:textStyle="bold" />
+    android:textSize="18sp" />
 
 </RelativeLayout>

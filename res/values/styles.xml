@@ -70,6 +70,14 @@
     <item name="android:textSize">18sp</item>
   </style>
 
+  <style name="TextAppearance.Credits.Gold" parent="TextAppearance.InfoBox.Large">
+    <item name="android:textColor">@color/gold</item>
+  </style>
+  
+  <style name="TextAppearance.Credits.Small" parent="TextAppearance.InfoBox.Small">
+    <item name="android:textColor">#FFF</item>
+  </style>
+
   <style name="InfoBox">
 
     <!-- <item name="android:background">@drawable/info_box_background</item> -->

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:ignition="http://github.com/ignition/schema"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/translucent_black"
-  android:padding="20dp" >
+  android:background="@drawable/movie_compact_bg"
+  android:fillViewport="true" >
 
-  <com.github.ignition.core.widgets.RemoteImageView
-    android:id="@+id/movie_details_poster"
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_centerHorizontal="true"
-    android:scaleType="center"
-    android:src="@drawable/main_background"
-    ignition:autoLoad="false" />
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal" >
 
-</RelativeLayout>
+    <com.github.ignition.core.widgets.RemoteImageView
+      android:id="@+id/movie_details_poster"
+      android:layout_width="@dimen/poster_image_width"
+      android:layout_height="@dimen/poster_image_height"
+      android:scaleType="center"
+      ignition:autoLoad="false" />
+
+    <ViewStub
+      android:id="@+id/movie_details_summary_section"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/movie_details_poster"
+      android:layout="@android:layout/simple_list_item_2" />
+  </RelativeLayout>
+
+</ScrollView>
