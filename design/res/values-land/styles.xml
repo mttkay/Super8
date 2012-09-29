@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="HeaderFragmentBand">
+    <item name="android:background">#00F</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">148dp</item>
+    <item name="android:layout_marginTop">5dp</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="HeaderFragmentRibbon">
+    <item name="android:layout_width">127dp</item>
+    <item name="android:layout_height">148dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+  </style>
+
+  <style name="HeaderFragmentLogo">
+    <item name="android:layout_width">100dp</item>
+    <item name="android:layout_height">70dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:layout_marginTop">15dp</item>
+  </style>
+
+  <style name="HeaderFragmentPowerButton" parent="HeaderFragmentButton.PowerButtonBase">
+    <item name="android:layout_marginTop">30dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_width">75dp</item>
+    <item name="android:layout_height">75dp</item>
+  </style>
+
+  <style name="HeaderFragmentPlayButton" parent="HeaderFragmentButton.PlayButtonBase">
+    <item name="android:layout_marginTop">30dp</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_width">75dp</item>
+    <item name="android:layout_height">75dp</item>
+  </style>
+
+</resources>

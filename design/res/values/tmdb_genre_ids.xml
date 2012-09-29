@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <integer-array name="tmdb_genre_ids">
+    <item>28</item>
+    <item>10759</item>
+    <item>12</item>
+    <item>16</item>
+    <item>10760</item>
+    <item>35</item>
+    <item>80</item>
+    <item>105</item>
+    <item>99</item>
+    <item>18</item>
+    <item>82</item>
+    <item>10761</item>
+    <item>2916</item>
+    <item>10751</item>
+    <item>10750</item>
+    <item>14</item>
+    <item>10753</item>
+    <item>10769</item>
+    <item>36</item>
+    <item>10595</item>
+    <item>27</item>
+    <item>10756</item>
+    <item>10762</item>
+    <item>10402</item>
+    <item>22</item>
+    <item>9648</item>
+    <item>10754</item>
+    <item>10763</item>
+    <item>10764</item>
+    <item>1115</item>
+    <item>10749</item>
+    <item>10765</item>
+    <item>878</item>
+    <item>10755</item>
+    <item>10766</item>
+    <item>9805</item>
+    <item>10758</item>
+    <item>10757</item>
+    <item>10748</item>
+    <item>10770</item>
+    <item>10767</item>
+    <item>53</item>
+    <item>10752</item>
+    <item>10768</item>
+    <item>37</item>
+  </integer-array>
+
+</resources>

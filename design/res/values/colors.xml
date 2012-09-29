@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- opacity levels: -->
+  <!-- 80 = 50% -->
+  <!-- E6 = 90% -->
+  <color name="button_blue">#225577</color>
+  <color name="button_blue_light">#77aacc</color>
+  <color name="stroke_blue">#113344</color>
+  <color name="toast_info_bg">#77aacc</color>
+  <color name="toast_info_stroke">#00aacc</color>
+  <color name="toast_error_bg">#80FF0000</color>
+  <color name="toast_error_stroke">#00FF0000</color>
+  <color name="translucent_black">#80000000</color>
+  <color name="translucent_black_deep">#E6000000</color>
+  <color name="translucent_dark_blue">#80113344</color>
+  <color name="dark_blue">#113344</color>
+  <color name="dark_grey">#112222</color>
+  <color name="gold">#c8ae8a</color>
+  <color name="light_brown_translucent">#80655D53</color>
+
+</resources>

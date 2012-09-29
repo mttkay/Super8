@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/header_fragment_height" >
+
+  <LinearLayout
+    android:id="@+id/header_band"
+    style="@style/HeaderFragmentBand" >
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.8"
+      android:background="@drawable/header_background" >
+    </FrameLayout>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.2"
+      android:background="@android:color/transparent" >
+    </FrameLayout>
+  </LinearLayout>
+
+  <RelativeLayout
+    android:id="@+id/header_camera_ribbon"
+    style="@style/HeaderFragmentRibbon" >
+
+    <ImageView
+      android:id="@+id/header_lens"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/lens_off" />
+
+    <ImageView
+      android:id="@+id/header_logo"
+      style="@style/HeaderFragmentLogo"
+      android:src="@drawable/logo_off" />
+  </RelativeLayout>
+
+  <ToggleButton
+    android:id="@+id/header_camera_power_button"
+    style="@style/HeaderFragmentPowerButton" />
+
+  <ToggleButton
+    android:id="@+id/header_camera_play_button"
+    style="@style/HeaderFragmentPlayButton" />
+  
+</RelativeLayout>

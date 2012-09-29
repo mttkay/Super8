@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Super8" parent="Theme.HoloEverywhereDark.Sherlock">
+
+    <!-- <item name="android:editTextStyle">@style/EditText</item> -->
+    <item name="android:textAppearance">@style/TextAppearance.Default</item>
+    <item name="android:textAppearanceSmall">@style/TextAppearance.Small</item>
+    <item name="android:textAppearanceMedium">@style/TextAppearance.Medium</item>
+    <!-- <item name="android:windowBackground">@drawable/main_bg_1</item> -->
+    <!-- <item name="android:button">@style/CircleButton</item> -->
+
+
+    <!-- ActionBar stuff -->
+    <item name="windowActionBarOverlay">true</item>
+    <item name="android:windowActionBarOverlay">true</item>
+    <item name="actionBarStyle">@style/ActionBar</item>
+    <item name="android:actionBarStyle">@style/ActionBar</item>
+  </style>
+
+  <style name="NoActionBarOverlay" parent="Super8">
+    <item name="windowActionBarOverlay">false</item>
+  </style>
+
+  <style name="ActionBar" parent="Widget.Sherlock.ActionBar"></style>
+
+  <style name="CircleButton" parent="android:Widget.Button">
+    <item name="android:layout_width">50dp</item>
+    <item name="android:layout_height">50dp</item>
+    <item name="android:background">@drawable/button</item>
+  </style>
+
+  <style name="ToggleButton" parent="android:Widget.Button.Toggle">
+    <item name="android:layout_width">50dp</item>
+    <item name="android:layout_height">50dp</item>
+    <item name="android:textOn">@null</item>
+    <item name="android:textOff">@null</item>
+  </style>
+
+  <style name="EditText" parent="@android:Widget.EditText">
+
+    <!-- <item name="android:background">@drawable/edit_text_bg</item> -->
+    <item name="android:textColor">#FFF</item>
+    <item name="android:padding">10dp</item>
+  </style>
+
+  <style name="TextAppearance.Default" parent="android:TextAppearance">
+    <item name="android:textColor">#FFF</item>
+  </style>
+
+  <style name="TextAppearance.Small" parent="TextAppearance.Default">
+    <item name="android:textSize">18sp</item>
+  </style>
+
+  <style name="TextAppearance.Medium" parent="TextAppearance.Default">
+    <item name="android:textSize">24sp</item>
+  </style>
+
+  <style name="TextAppearance.Large" parent="TextAppearance.Default">
+    <item name="android:textSize">32sp</item>
+  </style>
+
+  <style name="TextAppearance.InfoBox.Large" parent="android:TextAppearance">
+    <item name="android:textColor">#FFF</item>
+    <item name="android:textSize">24sp</item>
+  </style>
+
+  <style name="TextAppearance.InfoBox.Small" parent="android:TextAppearance">
+    <item name="android:textColor">@color/gold</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+
+  <style name="TextAppearance.Credits.Gold" parent="TextAppearance.InfoBox.Large">
+    <item name="android:textColor">@color/gold</item>
+  </style>
+
+  <style name="TextAppearance.Credits.Small" parent="TextAppearance.InfoBox.Small">
+    <item name="android:textColor">#FFF</item>
+  </style>
+
+  <style name="InfoBox">
+
+    <!-- <item name="android:background">@drawable/info_box_background</item> -->
+    <item name="android:padding">10dp</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="InfoBox.TextView" parent="android:Widget.TextView">
+    <item name="android:textAppearance">@style/TextAppearance.InfoBox.Large</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_centerHorizontal">true</item>
+  </style>
+
+  <style name="InfoBox.TextView.Sub" parent="InfoBox.TextView">
+    <item name="android:textAppearance">@style/TextAppearance.InfoBox.Small</item>
+    <item name="android:layout_marginTop">10dp</item>
+    <item name="android:layout_below">@android:id/text1</item>
+  </style>
+
+  <style name="HeaderFragmentBand">
+    <item name="android:background">#0F0</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">6dp</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="HeaderFragmentRibbon">
+    <item name="android:layout_width">158dp</item>
+    <item name="android:layout_height">185dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+  </style>
+
+  <style name="HeaderFragmentLogo">
+    <item name="android:layout_width">125dp</item>
+    <item name="android:layout_height">87dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:layout_marginTop">19dp</item>
+  </style>
+
+  <style name="HeaderFragmentPowerButton" parent="HeaderFragmentButton.PowerButtonBase">
+    <item name="android:layout_marginTop">40dp</item>
+    <item name="android:layout_width">75dp</item>
+    <item name="android:layout_height">75dp</item>
+  </style>
+
+  <style name="HeaderFragmentPlayButton" parent="HeaderFragmentButton.PlayButtonBase">
+    <item name="android:layout_marginTop">40dp</item>
+    <item name="android:layout_width">75dp</item>
+    <item name="android:layout_height">75dp</item>
+  </style>
+
+  <style name="HeaderFragmentButton.PowerButtonBase">
+    <item name="android:layout_toLeftOf">@+id/header_camera_ribbon</item>
+    <item name="android:background">@drawable/power_button</item>
+  </style>
+
+  <style name="HeaderFragmentButton.PlayButtonBase">
+    <item name="android:layout_toRightOf">@+id/header_camera_ribbon</item>
+    <item name="android:background">@drawable/play_button</item>
+    <item name="android:enabled">false</item>
+  </style>
+
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+  <string-array name="tmdb_genre_names">
+    <item>Action</item>
+    <item>Action &amp; Adventure</item>
+    <item>Adventure</item>
+    <item>Animation</item>
+    <item>British</item>
+    <item>Comedy</item>
+    <item>Crime</item>
+    <item>Disaster</item>
+    <item>Documentary</item>
+    <item>Drama</item>
+    <item>Eastern</item>
+    <item>Education</item>
+    <item>Erotic</item>
+    <item>Family</item>
+    <item>Fan Film</item>
+    <item>Fantasy</item>
+    <item>Film Noir</item>
+    <item>Foreign</item>
+    <item>History</item>
+    <item>Holiday</item>
+    <item>Horror</item>
+    <item>Indie</item>
+    <item>Kids</item>
+    <item>Music</item>
+    <item>Musical</item>
+    <item>Mystery</item>
+    <item>Neo-noir</item>
+    <item>News</item>
+    <item>Reality</item>
+    <item>Road Movie</item>
+    <item>Romance</item>
+    <item>Sci-Fi &amp; Fantasy</item>
+    <item>Science Fiction</item>
+    <item>Short</item>
+    <item>Soap</item>
+    <item>Sport</item>
+    <item>Sporting Event</item>
+    <item>Sports Film</item>
+    <item>Suspense</item>
+    <item>TV movie</item>
+    <item>Talk</item>
+    <item>Thriller</item>
+    <item>War</item>
+    <item>War &amp; Politics</item>
+    <item>Western</item>
+  </string-array>
+
+</resources>
