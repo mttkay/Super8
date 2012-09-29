@@ -4,7 +4,11 @@ public interface ControlPanel {
 
   void showRecordView();
   
+  void hideRecordView();
+  
   void showPlayView();
+  
+  void hidePlayView();
 
   void disableControlPanel();
   

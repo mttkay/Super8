@@ -38,17 +38,17 @@ public class InfoBoxFragment extends RoboFragment {
     flipper = (ViewFlipper) layout.findViewById(R.id.view_flipper);
     
     // the info/help text that's guiding the user through the app
-    View helpContent = inflater.inflate(R.layout.flipper_content_help_text, flipper, false);
-    TextView textView = (TextView) helpContent.findViewById(android.R.id.text1);
-    textView.setTypeface(font);
-    textView = (TextView) helpContent.findViewById(android.R.id.text2);
-    textView.setTypeface(font, Typeface.BOLD);
+    //View helpContent = inflater.inflate(R.layout.flipper_content_help_text, flipper, false);
+//    TextView textView = (TextView) helpContent.findViewById(android.R.id.text1);
+//    textView.setTypeface(font);
+//    textView = (TextView) helpContent.findViewById(android.R.id.text2);
+//    textView.setTypeface(font, Typeface.BOLD);
     
     // the movie watchlist
-    View watchlistContent = inflater.inflate(R.layout.flipper_content_watchlist, flipper, false);
-    
-    flipper.addView(helpContent);
-    flipper.addView(watchlistContent);
+    //View watchlistContent = inflater.inflate(R.layout.flipper_content_watchlist, flipper, false);
+//    
+//    flipper.addView(helpContent);
+//    flipper.addView(watchlistContent);
 
     return layout;
   }

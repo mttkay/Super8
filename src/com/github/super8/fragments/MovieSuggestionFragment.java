@@ -28,6 +28,7 @@ import com.github.super8.support.Fonts;
 import com.github.super8.support.SuperToast;
 import com.google.inject.Inject;
 
+//TODO: Need to rewrite this to be in a ViewPager
 public class MovieSuggestionFragment extends TaskManagingFragment<Movie> implements
     TmdbApiHandler<Movie>, OnClickListener, ActionMode.Callback {
 
@@ -49,7 +50,6 @@ public class MovieSuggestionFragment extends TaskManagingFragment<Movie> impleme
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     suggestions = library.getMovieSuggestions();
-    presenter.bind((ActsAsHomeScreen) getActivity());
   }
 
   @Override

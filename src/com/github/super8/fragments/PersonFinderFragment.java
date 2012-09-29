@@ -9,10 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -28,10 +25,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.super8.R;
+import com.github.super8.activities.HomeActivity;
 import com.github.super8.adapters.PersonListAdapter;
 import com.github.super8.apis.tmdb.v3.DefaultTmdbApiHandler;
 import com.github.super8.apis.tmdb.v3.TmdbApi;
 import com.github.super8.apis.tmdb.v3.TmdbApiHandler;
+import com.github.super8.behavior.RecordPanelsDirector;
 import com.github.super8.model.Person;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
@@ -54,6 +53,7 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   @InjectView(android.R.id.edit) private EditText searchField;
   @InjectView(android.R.id.progress) private ProgressBar progressSpinner;
 
+  private RecordPanelsDirector director;
   private PersonListAdapter adapter;
   private Handler queryReadyHandler;
 
@@ -61,6 +61,14 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
     setRetainInstance(true);
   }
 
+  public void setRecordPanelsDirector(RecordPanelsDirector director) {
+    this.director = director;
+  }
+
+  public RecordPanelsDirector getRecordPanelsDirector() {
+    return director;
+  }
+  
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -207,16 +215,9 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
 
     @Override
     public boolean onTaskSuccess(Context context, Person person) {
-      FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-      FragmentTransaction tx = fragmentManager.beginTransaction();
-      // tx.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-      PersonDetailsFragment fragment = new PersonDetailsFragment();
-      Bundle args = new Bundle();
-      args.putParcelable(PersonDetailsFragment.PERSON_EXTRA, person);
-      fragment.setArguments(args);
-      tx.add(R.id.drawer_content, fragment);
-      tx.addToBackStack(PersonDetailsFragment.TAG);
-      tx.commit();
+      HomeActivity activity = (HomeActivity) context;
+      PersonFinderFragment fragment = (PersonFinderFragment) activity.getSupportFragmentManager().findFragmentById(R.id.person_finder_fragment);
+      fragment.getRecordPanelsDirector().onPersonSelected(person);
       return true;
     }
   }

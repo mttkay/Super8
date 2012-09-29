@@ -1,55 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" >
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/header_fragment_height" >
 
-  <ImageView
-    android:id="@+id/header_camera_image"
-    android:layout_width="fill_parent"
-    android:layout_height="160dp"
-    android:layout_below="@+id/header_logo_image"
-    android:layout_marginTop="-30dp"
-    android:background="@drawable/lens_off" />
+  <LinearLayout
+    android:id="@+id/header_band"
+    style="@style/HeaderFragmentBand" >
 
-  <ImageView
-    android:id="@+id/header_logo_image"
-    android:layout_width="320dp"
-    android:layout_height="128dp"
-    android:contentDescription="@string/app_name"
-    android:src="@drawable/logo_off" />
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.8"
+      android:background="@drawable/header_background" >
+    </FrameLayout>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.2"
+      android:background="@android:color/transparent" >
+    </FrameLayout>
+  </LinearLayout>
+
+  <RelativeLayout
+    android:id="@+id/header_camera_ribbon"
+    style="@style/HeaderFragmentRibbon" >
+
+    <ImageView
+      android:id="@+id/header_lens"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/lens_off" />
+
+    <ImageView
+      android:id="@+id/header_logo"
+      style="@style/HeaderFragmentLogo"
+      android:src="@drawable/logo_off" />
+  </RelativeLayout>
 
   <ToggleButton
     android:id="@+id/header_camera_power_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/header_logo_image"
-    android:layout_marginLeft="25dp"
-    android:layout_marginTop="25dp"
-    android:text="Power"
-    android:textOff="@null"
-    android:textOn="@null" />
+    style="@style/HeaderFragmentPowerButton" />
 
-  <RadioGroup
-    android:id="@+id/header_control_buttons"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentRight="true"
-    android:layout_below="@+id/header_logo_image"
-    android:layout_marginRight="25dp"
-    android:orientation="vertical" >
-
-    <RadioButton
-      android:id="@+id/header_camera_play_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Play" />
-
-    <RadioButton
-      android:id="@+id/header_camera_rec_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Rec" />
-  </RadioGroup>
+  <ToggleButton
+    android:id="@+id/header_camera_play_button"
+    style="@style/HeaderFragmentPlayButton" />
 
 </RelativeLayout>

@@ -7,4 +7,6 @@
   <item name="menu_suggestion_seen" type="id"/>
   <item name="menu_suggestion_hate" type="id"/>
   
+  <item name="action_panel_container" type="id"/>
+
 </resources>

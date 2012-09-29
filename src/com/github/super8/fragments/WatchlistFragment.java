@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Gallery;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
@@ -27,7 +28,9 @@ public class WatchlistFragment extends RoboFragment implements OnItemClickListen
 
   @Inject private LibraryManager library;
 
+  @InjectView(R.id.watchlist_layout) private ViewGroup container;
   @InjectView(R.id.gallery) private Gallery gallery;
+  @InjectView(android.R.id.empty) private View emptyView;
 
   private MovieGalleryAdapter adapter;
   private Movie currentMovie;
@@ -45,10 +48,31 @@ public class WatchlistFragment extends RoboFragment implements OnItemClickListen
     gallery.setAdapter(adapter);
     gallery.setOnItemClickListener(this);
     gallery.setOnItemSelectedListener(this);
+    
+    TextView helpText1 = (TextView) emptyView.findViewById(android.R.id.text1);
+    helpText1.setText(R.string.help_text_empty_watchlist_1);
+    TextView helpText2 = (TextView) emptyView.findViewById(android.R.id.text2);
+    helpText2.setText(R.string.help_text_empty_watchlist_2);
   }
 
   public void refresh() {
-    adapter.notifyDataSetChanged();
+    if (library.hasWatchlistItems()) {
+      adapter.notifyDataSetChanged();
+      gallery.setVisibility(View.VISIBLE);
+      emptyView.setVisibility(View.GONE);
+    } else {
+      gallery.setVisibility(View.GONE);
+      emptyView.setVisibility(View.VISIBLE);
+    }
+  }
+
+  public void show(boolean show) {
+    if (show) {
+      container.setVisibility(View.VISIBLE);
+      refresh();
+    } else {
+      container.setVisibility(View.GONE);
+    }
   }
 
   @Override

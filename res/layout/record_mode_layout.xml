@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/record_mode_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="15dp" >
+
+  <fragment
+    android:id="@+id/person_finder_fragment"
+    android:name="com.github.super8.fragments.PersonFinderFragment"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1" />
+
+  <FrameLayout
+    android:id="@+id/person_details_fragment"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:visibility="gone" />
+
+  <FrameLayout
+    android:id="@+id/person_filmography_fragment"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:visibility="gone" />
+
+</LinearLayout>

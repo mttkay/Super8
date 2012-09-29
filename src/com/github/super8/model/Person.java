@@ -2,14 +2,21 @@ package com.github.super8.model;
 
 import java.util.Date;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Person extends ImageRecord {
 
+  public static final String EXTRA_KEY = "person";
+  
   private String name, biography;
   private Date birthday;
 
+  public void addTo(Bundle bundle) {
+    bundle.putParcelable(EXTRA_KEY, this);
+  }
+  
   public String getName() {
     return name;
   }

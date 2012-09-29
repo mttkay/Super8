@@ -10,12 +10,12 @@ import com.google.inject.Singleton;
 public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawerCloseListener {
 
   public enum State {
-    WATCHLIST_EMPTY, WATCHLIST_AVAILABLE, RECORD, PLAY;
+    OFF, RECORD, PLAY;
   }
 
   private ActsAsHomeScreen homeScreen;
   private LibraryManager library;
-  private State state = State.WATCHLIST_EMPTY;
+  private State state = State.OFF;
 
   @Inject
   public HomeScreenPresenter(LibraryManager library) {
@@ -30,18 +30,15 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   }
 
   public void powerOff() {
-    homeScreen.hideSlidingDrawer();
     homeScreen.disableControlPanel();
-    if (library.hasWatchlistItems()) {
-      homeScreen.showWatchlistView();
-      state = State.WATCHLIST_AVAILABLE;
-    } else {
-      homeScreen.showWatchlistEmptyView();
-      state = State.WATCHLIST_EMPTY;
-    }
+    homeScreen.hidePlayView();
+    homeScreen.hideRecordView();
+    homeScreen.showWatchlist();
+    state = State.OFF;
   }
 
   public void powerOn() {
+    homeScreen.hideWatchlist();
     homeScreen.enableControlPanel();
     if (library.hasSuggestions()) {
       enterPlaybackMode();
@@ -55,28 +52,28 @@ public class HomeScreenPresenter implements Presenter<ActsAsHomeScreen>, OnDrawe
   }
 
   public void enterRecordingMode() {
-    homeScreen.showSlidingDrawer();
+    homeScreen.hidePlayView();
     homeScreen.showRecordView();
     state = State.RECORD;
   }
 
   public void enterPlaybackMode() {
-    homeScreen.showSlidingDrawer();
+    homeScreen.hideRecordView();
     homeScreen.showPlayView();
     homeScreen.loadMovieSuggestion();
     state = State.PLAY;
   }
 
   public void getNextMovieSuggestion() {
-    if (state != State.PLAY) {
-      enterPlaybackMode();
-    } else {
-      homeScreen.closeSlidingDrawer(); // this will trigger the next suggestion
-    }
+//    if (state != State.PLAY) {
+//      enterPlaybackMode();
+//    } else {
+//      homeScreen.closeSlidingDrawer(); // this will trigger the next suggestion
+//    }
   }
 
   public void onMovieSuggestionAvailable() {
-    homeScreen.showSlidingDrawer();
+    //homeScreen.showSlidingDrawer();
     // homeScreen.openSlidingDrawer();
   }
 

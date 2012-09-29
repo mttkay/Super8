@@ -3,5 +3,6 @@
 
   <dimen name="poster_image_width">185dp</dimen>
   <dimen name="poster_image_height">265dp</dimen>
-  
+  <dimen name="header_fragment_height">238dp</dimen>
+
 </resources>

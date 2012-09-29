@@ -24,7 +24,6 @@ import com.google.inject.Inject;
 public class PersonDetailsFragment extends RoboFragment {
 
   public static final String TAG = PersonDetailsFragment.class.getSimpleName();
-  public static final String PERSON_EXTRA = "person";
 
   public static final int MSG_MOVIE_IMPORTED = 0;
   public static final int MSG_IMPORT_STARTED = 1;
@@ -41,7 +40,9 @@ public class PersonDetailsFragment extends RoboFragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.person = getArguments().getParcelable(PERSON_EXTRA);
+    if (getArguments() != null) {
+      this.person = getArguments().getParcelable(Person.EXTRA_KEY);
+    }
   }
 
   @Override
@@ -52,6 +53,10 @@ public class PersonDetailsFragment extends RoboFragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    if (person == null) {
+      // TODO: show empty view or something
+      return;
+    }
     String imageUrl = person.getScaledImageUrl(getActivity());
     if (imageUrl != null) {
       personImageView.setImageUrl(imageUrl);
@@ -68,7 +73,8 @@ public class PersonDetailsFragment extends RoboFragment {
           library.savePerson(person);
           Intent intent = new Intent(getActivity(), ImportFilmographyService.class);
           intent.putExtra(ImportFilmographyService.PERSON_ID_EXTRA, person.getTmdbId());
-          Messenger messenger = new Messenger(new Handler(getHomeScreen().getImportFilmographyHandler()));
+          Messenger messenger = new Messenger(new Handler(getHomeScreen()
+              .getImportFilmographyHandler()));
           intent.putExtra(ImportFilmographyService.MESSENGER_EXTRA, messenger);
           getActivity().startService(intent);
         } else {
