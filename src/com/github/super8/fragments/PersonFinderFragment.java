@@ -68,7 +68,7 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   public RecordPanelsDirector getRecordPanelsDirector() {
     return director;
   }
-  
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -117,8 +117,7 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   public void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
 
-    TextView personName = (TextView) v.findViewById(android.R.id.text1);
-    personName.setText(R.string.person_loading);
+    progressSpinner.setVisibility(View.VISIBLE);
 
     Person person = adapter.getItem(position);
     taskManager.registerTask(TASK_GET_PERSON_DETAILS,
@@ -216,7 +215,11 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
     @Override
     public boolean onTaskSuccess(Context context, Person person) {
       HomeActivity activity = (HomeActivity) context;
-      PersonFinderFragment fragment = (PersonFinderFragment) activity.getSupportFragmentManager().findFragmentById(R.id.person_finder_fragment);
+
+      PersonFinderFragment fragment = (PersonFinderFragment) activity.getSupportFragmentManager()
+          .findFragmentById(R.id.person_finder_fragment);
+      fragment.progressSpinner.setVisibility(View.GONE);
+
       fragment.getRecordPanelsDirector().onPersonSelected(person);
       return true;
     }
