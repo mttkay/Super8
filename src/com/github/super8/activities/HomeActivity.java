@@ -152,12 +152,20 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
   // }
   // }
 
-  // @Override
-  // public void onBackPressed() {
-  // if (!views.onBackPressed()) {
-  // super.onBackPressed();
-  // }
-  // }
+  @Override
+  public void onBackPressed() {
+    boolean handled = false;
+    switch (presenter.getState()) {
+    case RECORD:
+      handled = recordPanelsDirector.onBackPressed();
+      break;
+    case PLAY:
+      break;
+    }
+    if (!handled) {
+      super.onBackPressed();
+    }
+  }
 
   @Override
   public void onShake() {

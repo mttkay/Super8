@@ -6,8 +6,10 @@ import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.github.super8.R;
 import com.github.super8.activities.HomeActivity;
+import com.github.super8.activities.PersonDetailsActivity;
 import com.github.super8.fragments.PersonDetailsFragment;
 import com.github.super8.fragments.PersonFinderFragment;
 import com.github.super8.model.Person;
@@ -45,7 +48,7 @@ public class RecordPanelsDirector implements RecordingBehavior {
   }
 
   public boolean onBackPressed() {
-    return false;
+    return behavior.onBackPressed();
   }
 
   public void show(boolean show) {
@@ -72,12 +75,19 @@ class PortraitBehavior implements RecordingBehavior {
 
   @Override
   public void show(boolean show) {
-
   }
 
   @Override
   public void onPersonSelected(Person person) {
-    // TODO: start new PersonActivity embedding PersonDetailsFragment
+    Intent intent = new Intent(activity, PersonDetailsActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra(Person.EXTRA_KEY, person);
+    activity.startActivity(intent);
+  }
+
+  @Override
+  public boolean onBackPressed() {
+    return false;
   }
 }
 
@@ -97,14 +107,29 @@ class LandscapeBehavior implements RecordingBehavior {
 
   @Override
   public void onPersonSelected(Person person) {
-    layout.findViewById(R.id.person_details_fragment).setVisibility(View.VISIBLE);
+    View fragmentContainer = layout.findViewById(R.id.person_details_fragment);
+
     FragmentManager fragmentManager = activity.getSupportFragmentManager();
     FragmentTransaction tx = fragmentManager.beginTransaction();
-    PersonDetailsFragment fragment = new PersonDetailsFragment();
+
+    Fragment fragment = new PersonDetailsFragment();
     Bundle bundle = new Bundle();
     person.addTo(bundle);
     fragment.setArguments(bundle);
-    tx.add(R.id.person_details_fragment, fragment);
+
+    tx.replace(R.id.person_details_fragment, fragment);
+
+    if (fragmentContainer.getVisibility() == View.GONE) {
+      fragmentContainer.setVisibility(View.VISIBLE);
+      tx.addToBackStack(null);
+    }
+
     tx.commit();
+  }
+
+  @Override
+  public boolean onBackPressed() {
+    layout.findViewById(R.id.person_details_fragment).setVisibility(View.GONE);
+    return false;
   }
 }

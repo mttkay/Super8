@@ -3,6 +3,7 @@
   android:id="@+id/record_mode_layout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:animateLayoutChanges="true"
   android:padding="15dp" >
 
   <fragment
@@ -16,6 +17,7 @@
     android:id="@+id/person_details_fragment"
     android:layout_width="0dp"
     android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
     android:layout_weight="1"
     android:visibility="gone" />
 
@@ -23,6 +25,7 @@
     android:id="@+id/person_filmography_fragment"
     android:layout_width="0dp"
     android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
     android:layout_weight="1"
     android:visibility="gone" />
 
