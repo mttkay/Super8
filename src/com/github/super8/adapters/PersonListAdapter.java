@@ -2,6 +2,7 @@ package com.github.super8.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -18,11 +19,13 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
 
   private Typeface elementFont;
   private RemoteImageLoader imageLoader;
+  private Drawable noImageDrawable;
 
   public PersonListAdapter(Context context) {
     super(context, R.layout.person_list_item, android.R.id.text1);
     elementFont = Fonts.loadFont(context, "Roboto-Light.ttf");
     imageLoader = ((Super8Application) context.getApplicationContext()).getImageLoader();
+    noImageDrawable = context.getResources().getDrawable(R.drawable.anonymous);
   }
 
   @Override
@@ -35,14 +38,15 @@ public class PersonListAdapter extends ArrayAdapter<Person> {
       holder.nameText = (TextView) itemView.findViewById(android.R.id.text1);
       holder.nameText.setTypeface(elementFont);
       holder.imageView = (ImageView) itemView.findViewById(R.id.person_image);
+      //holder.imageView.setBackgroundResource(R.drawable.person_image_frame);
       itemView.setTag(holder);
     }
 
     Person person = getItem(position);
 
     holder.nameText.setText(person.getName());
-    holder.imageView.setImageDrawable(null);
-
+    holder.imageView.setImageDrawable(noImageDrawable);
+    
     String imageUrl = person.getScaledImageUrl(getContext());
     if (imageUrl != null) {
       imageLoader.loadImage(imageUrl, holder.imageView);
