@@ -3,6 +3,7 @@ package com.github.super8;
 import android.app.Application;
 
 import com.github.ignition.core.widgets.RemoteImageView;
+import com.github.ignition.support.cache.ImageCache;
 import com.github.ignition.support.images.remote.RemoteImageLoader;
 
 public class Super8Application extends Application {
@@ -14,6 +15,7 @@ public class Super8Application extends Application {
     super.onCreate();
 
     imageLoader = new RemoteImageLoader(this);
+    imageLoader.getImageCache().enableDiskCache(this, ImageCache.DISK_CACHE_SDCARD);
     RemoteImageView.setSharedImageLoader(imageLoader);
   }
 
