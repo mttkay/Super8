@@ -8,8 +8,11 @@
     android:id="@android:id/edit"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:drawableLeft="@android:drawable/ic_menu_search"
+    android:drawablePadding="10dp"
     android:hint="@string/like_artist_or_director_hint"
     android:inputType="textAutoCorrect"
+    android:padding="15dp"
     android:selectAllOnFocus="true" />
 
   <ProgressBar

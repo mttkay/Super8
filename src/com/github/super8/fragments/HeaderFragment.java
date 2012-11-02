@@ -26,7 +26,7 @@ public class HeaderFragment extends RoboFragment implements ControlPanel, OnClic
 
   @Inject private LibraryManager library;
 
-  @InjectView(R.id.header_logo) private ImageView logoImage;
+  //@InjectView(R.id.header_logo) private ImageView logoImage;
   @InjectView(R.id.header_lens) private ImageView lensImage;
   @InjectView(R.id.header_camera_power_button) private ToggleButton powerButton;
   @InjectView(R.id.header_camera_play_button) private ToggleButton playButton;
@@ -46,7 +46,7 @@ public class HeaderFragment extends RoboFragment implements ControlPanel, OnClic
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    logoImage.setImageDrawable(logoDrawable);
+    //logoImage.setImageDrawable(logoDrawable);
 
     powerButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
       @Override

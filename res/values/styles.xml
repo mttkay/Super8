@@ -12,8 +12,8 @@
 
 
     <!-- ActionBar stuff -->
-    <item name="windowActionBarOverlay">true</item>
-    <item name="android:windowActionBarOverlay">true</item>
+<!--     <item name="windowActionBarOverlay">true</item>
+    <item name="android:windowActionBarOverlay">true</item> -->
     <item name="actionBarStyle">@style/ActionBar</item>
     <item name="android:actionBarStyle">@style/ActionBar</item>
   </style>
@@ -106,7 +106,7 @@
 
   <style name="HeaderFragmentRibbon">
     <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">@dimen/header_fragment_height</item>
+    <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_centerHorizontal">true</item>
   </style>
 
@@ -119,17 +119,18 @@
 
   <style name="HeaderFragmentPowerButtonBase">
     <item name="android:layout_toLeftOf">@+id/header_camera_ribbon</item>
-    <item name="android:background">@drawable/power_button</item>
-    <item name="android:textOff">@null</item>
+<!--     <item name="android:background">@drawable/power_button</item>
+     <item name="android:textOff">@null</item>
     <item name="android:textOn">@null</item>
+    -->
   </style>
 
   <style name="HeaderFragmentPlayButtonBase">
     <item name="android:layout_toRightOf">@+id/header_camera_ribbon</item>
-    <item name="android:background">@drawable/play_button</item>
-    <item name="android:enabled">false</item>
-    <item name="android:textOff">@null</item>
-    <item name="android:textOn">@null</item>
+<!--     <item name="android:background">@drawable/play_button</item>
+ -->    <item name="android:enabled">false</item>
+    <item name="android:textOff">Play</item>
+    <item name="android:textOn">Rec</item>
   </style>
 
   <style name="HeaderFragmentPowerButton" parent="HeaderFragmentPowerButtonBase">

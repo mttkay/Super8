@@ -11,7 +11,7 @@
   <string name="help_text_in_like_mode_2">Pull out the drawer and tell me which artists you like. Press \'Power\' to end.</string>
   <string name="help_text_suggestions_1">I have suggestions for you!</string>
   <string name="help_text_suggestions_2">Shake me or pull the handle up and down to see the next suggestion.</string>
-  <string name="like_artist_or_director_hint">e.g. \"Chris Nolan\" or \"Brad Pitt\"</string>
+  <string name="like_artist_or_director_hint">e.g. \"Christopher Nolan\"</string>
   <string name="person_loading">Loading…</string>
   <string name="empty_list">No Results</string>
   <string name="menu_watchlist_details">Show movie details</string>

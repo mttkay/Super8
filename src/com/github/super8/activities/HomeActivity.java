@@ -45,9 +45,10 @@ public class HomeActivity extends RoboSherlockFragmentActivity implements ActsAs
     requestWindowFeature(Window.FEATURE_PROGRESS);
 
     ActionBar actionBar = getSupportActionBar();
-    actionBar.setDisplayShowHomeEnabled(false);
-    actionBar.setDisplayShowTitleEnabled(true);
-    actionBar.hide();
+    actionBar.setDisplayShowHomeEnabled(true);
+    actionBar.setDisplayShowTitleEnabled(false);
+    actionBar.setLogo(R.drawable.logo_small);
+    //actionBar.hide();
 
     shakeDetector = new ShakeDetector();
     shakeDetector.setOnShakeListener(this);
