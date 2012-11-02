@@ -7,7 +7,6 @@ import roboguice.inject.InjectFragment;
 import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,11 +38,11 @@ public class RecordPanelsDirector implements RecordingBehavior {
 
   public void initialize(@Observes OnContentChangedEvent event) {
     int orientation = activity.getResources().getConfiguration().orientation;
-    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-      this.behavior = new LandscapeBehavior(activity, layout);
-    } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//      this.behavior = new LandscapeBehavior(activity, layout);
+//    } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
       this.behavior = new PortraitBehavior(activity, layout);
-    }
+//    }
     personFinderFragment.setRecordPanelsDirector(this);
   }
 

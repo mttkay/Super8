@@ -12,11 +12,15 @@
 
 
     <!-- ActionBar stuff -->
-<!--     <item name="windowActionBarOverlay">true</item>
-    <item name="android:windowActionBarOverlay">true</item> -->
+    <!--
+         <item name="windowActionBarOverlay">true</item>
+    <item name="android:windowActionBarOverlay">true</item>
+    -->
     <item name="actionBarStyle">@style/ActionBar</item>
     <item name="android:actionBarStyle">@style/ActionBar</item>
   </style>
+
+  <style name="PersonDetailsTheme" parent="Super8"/>
 
   <style name="NoActionBarOverlay" parent="Super8">
     <item name="windowActionBarOverlay">false</item>
@@ -119,7 +123,8 @@
 
   <style name="HeaderFragmentPowerButtonBase">
     <item name="android:layout_toLeftOf">@+id/header_camera_ribbon</item>
-<!--     <item name="android:background">@drawable/power_button</item>
+    <!--
+         <item name="android:background">@drawable/power_button</item>
      <item name="android:textOff">@null</item>
     <item name="android:textOn">@null</item>
     -->
@@ -127,8 +132,8 @@
 
   <style name="HeaderFragmentPlayButtonBase">
     <item name="android:layout_toRightOf">@+id/header_camera_ribbon</item>
-<!--     <item name="android:background">@drawable/play_button</item>
- -->    <item name="android:enabled">false</item>
+    <!-- <item name="android:background">@drawable/play_button</item> -->
+    <item name="android:enabled">false</item>
     <item name="android:textOff">Play</item>
     <item name="android:textOn">Rec</item>
   </style>

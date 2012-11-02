@@ -28,7 +28,7 @@
     <activity
       android:name=".activities.MovieDetailsActivity"
       android:theme="@style/NoActionBarOverlay" />
-    <activity android:name=".activities.PersonDetailsActivity" />
+    <activity android:name=".activities.PersonDetailsActivity" android:theme="@style/PersonDetailsTheme" />
 
     <service android:name=".services.ImportFilmographyService" />
   </application>
