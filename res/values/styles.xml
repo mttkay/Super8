@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="Super8" parent="Theme.HoloEverywhereDark.Sherlock">
+  <style name="Super8" parent="Holo.Theme.Sherlock">
 
     <!-- <item name="android:editTextStyle">@style/EditText</item> -->
     <item name="android:textAppearance">@style/TextAppearance.Default</item>
