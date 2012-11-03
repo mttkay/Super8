@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="PersonDetailsTheme" parent="@android:style/Theme.Dialog">
+  <style name="PersonDetailsTheme" parent="Theme.Sherlock.Dialog">
     <item name="android:windowCloseOnTouchOutside">true</item>
   </style>
 
