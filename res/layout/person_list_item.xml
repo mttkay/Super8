@@ -14,7 +14,7 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
     android:background="@drawable/person_item_name_bg"
-    android:gravity="right"
+    android:gravity="center"
     android:padding="10dp"
     android:textAppearance="@style/TextAppearance.Medium" />
 

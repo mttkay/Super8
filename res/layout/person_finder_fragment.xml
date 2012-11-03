@@ -10,18 +10,19 @@
     android:layout_height="wrap_content"
     layout="@layout/edittext_with_spinner" />
 
-  <ListView
+  <include
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1"
-    android:cacheColorHint="@android:color/transparent" />
+    layout="@layout/person_finder_results_container" />
 
   <TextView
     android:id="@android:id/empty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:textAppearance="@style/TextAppearance.Large" />
+    android:textAppearance="@style/TextAppearance.Large"
+    android:visibility="gone" />
 
 </LinearLayout>

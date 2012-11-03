@@ -2,14 +2,13 @@ package com.github.super8.fragments;
 
 import java.util.List;
 
-import roboguice.fragment.RoboListFragment;
+import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,7 +18,11 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,8 +38,8 @@ import com.github.super8.model.Person;
 import com.github.super8.tasks.TaskManager;
 import com.google.inject.Inject;
 
-public class PersonFinderFragment extends RoboListFragment implements TmdbApiHandler<List<Person>>,
-    TextWatcher, Handler.Callback, OnBackStackChangedListener {
+public class PersonFinderFragment extends RoboFragment implements TmdbApiHandler<List<Person>>,
+    OnItemClickListener, TextWatcher, Handler.Callback {
 
   public static final String TAG = PersonFinderFragment.class.getSimpleName();
 
@@ -48,7 +51,7 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   @Inject private TaskManager taskManager;
   @Inject private TmdbApi tmdb;
 
-  @InjectView(android.R.id.list) private ListView listView;
+  @InjectView(android.R.id.list) private AbsListView listView;
   @InjectView(android.R.id.empty) private TextView emptyView;
   @InjectView(android.R.id.edit) private EditText searchField;
   @InjectView(android.R.id.progress) private ProgressBar progressSpinner;
@@ -78,7 +81,6 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   @Override
   public void onAttach(Activity activity) {
     super.onAttach(activity);
-    getFragmentManager().addOnBackStackChangedListener(this);
   }
 
   @Override
@@ -97,10 +99,16 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
     super.onViewCreated(view, savedInstanceState);
 
     adapter = new PersonListAdapter(getActivity());
-    setListAdapter(adapter);
+    // unfortunately, AbsListView.setAdapter has only been added in API lvl 11
+    if (listView instanceof ListView) {
+      ((ListView) listView).setAdapter(adapter);
+    } else {
+      ((GridView) listView).setAdapter(adapter);
+    }
+    listView.setOnItemClickListener(this);
 
     LayoutAnimationController listViewAnim = new LayoutAnimationController(
-        AnimationUtils.loadAnimation(getActivity(), android.R.anim.slide_in_left));
+        AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_bottom));
     listView.setLayoutAnimation(listViewAnim);
 
     searchField.addTextChangedListener(this);
@@ -110,13 +118,10 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   public void onDetach() {
     super.onDetach();
     taskManager.disconnectTasks();
-    getFragmentManager().removeOnBackStackChangedListener(this);
   }
 
   @Override
-  public void onListItemClick(ListView l, View v, int position, long id) {
-    super.onListItemClick(l, v, position, id);
-
+  public void onItemClick(AdapterView<?> l, View v, int position, long id) {
     progressSpinner.setVisibility(View.VISIBLE);
 
     Person person = adapter.getItem(position);
@@ -149,8 +154,14 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
   @Override
   public boolean onTaskSuccess(Context context, List<Person> result) {
     adapter.clear();
-    for (Person person : result) {
-      adapter.add(person);
+    if (result.isEmpty()) {
+      emptyView.setVisibility(View.VISIBLE);
+    } else {
+      emptyView.setVisibility(View.GONE);
+      // addAll is only available since API lvl 11
+      for (Person person : result) {
+        adapter.add(person);
+      }
     }
     return true;
   }
@@ -223,10 +234,5 @@ public class PersonFinderFragment extends RoboListFragment implements TmdbApiHan
       fragment.getRecordPanelsDirector().onPersonSelected(person);
       return true;
     }
-  }
-
-  @Override
-  public void onBackStackChanged() {
-    adapter.notifyDataSetChanged();
   }
 }

@@ -18,7 +18,8 @@
     android:theme="@style/Super8" >
     <activity
       android:name=".activities.HomeActivity"
-      android:uiOptions="splitActionBarWhenNarrow" >
+      android:uiOptions="splitActionBarWhenNarrow"
+      android:windowSoftInputMode="adjustPan" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +29,9 @@
     <activity
       android:name=".activities.MovieDetailsActivity"
       android:theme="@style/NoActionBarOverlay" />
-    <activity android:name=".activities.PersonDetailsActivity" android:theme="@style/PersonDetailsTheme" />
+    <activity
+      android:name=".activities.PersonDetailsActivity"
+      android:theme="@style/PersonDetailsTheme" />
 
     <service android:name=".services.ImportFilmographyService" />
   </application>
